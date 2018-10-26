@@ -57,9 +57,18 @@ public class restoProgram extends javax.swing.JFrame {
         txtLoginPassword = new javax.swing.JPasswordField();
         pnlInfo = new javax.swing.JPanel();
         btnStartupBack = new javax.swing.JButton();
+        pnlAdminMain = new javax.swing.JPanel();
+        pnlAdminMainTab = new javax.swing.JTabbedPane();
+        pnlAdminMainHome = new javax.swing.JPanel();
+        pnlAdminMainInfo = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         pnlCusMain = new javax.swing.JPanel();
         pnlCusMainTab = new javax.swing.JTabbedPane();
-        pnlCusMainMain = new javax.swing.JPanel();
+        pnlCusMainHome = new javax.swing.JPanel();
         pnlCusInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -221,20 +230,81 @@ public class restoProgram extends javax.swing.JFrame {
 
         mainPanel.add(pnlInfo, "card4");
 
-        pnlCusMain.setLayout(new java.awt.BorderLayout());
+        pnlAdminMain.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout pnlCusMainMainLayout = new javax.swing.GroupLayout(pnlCusMainMain);
-        pnlCusMainMain.setLayout(pnlCusMainMainLayout);
-        pnlCusMainMainLayout.setHorizontalGroup(
-            pnlCusMainMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlAdminMainHomeLayout = new javax.swing.GroupLayout(pnlAdminMainHome);
+        pnlAdminMainHome.setLayout(pnlAdminMainHomeLayout);
+        pnlAdminMainHomeLayout.setHorizontalGroup(
+            pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 495, Short.MAX_VALUE)
         );
-        pnlCusMainMainLayout.setVerticalGroup(
-            pnlCusMainMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlAdminMainHomeLayout.setVerticalGroup(
+            pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 354, Short.MAX_VALUE)
         );
 
-        pnlCusMainTab.addTab("Home", pnlCusMainMain);
+        pnlAdminMainTab.addTab("Home", pnlAdminMainHome);
+
+        jLabel8.setText("First Name:");
+
+        jLabel9.setText("Middle Name:");
+
+        jLabel10.setText("Last Name:");
+
+        jLabel11.setText("Username:");
+
+        jLabel12.setText("Password:");
+
+        javax.swing.GroupLayout pnlAdminMainInfoLayout = new javax.swing.GroupLayout(pnlAdminMainInfo);
+        pnlAdminMainInfo.setLayout(pnlAdminMainInfoLayout);
+        pnlAdminMainInfoLayout.setHorizontalGroup(
+            pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminMainInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addContainerGap(421, Short.MAX_VALUE))
+        );
+        pnlAdminMainInfoLayout.setVerticalGroup(
+            pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminMainInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addContainerGap(249, Short.MAX_VALUE))
+        );
+
+        pnlAdminMainTab.addTab("Info", pnlAdminMainInfo);
+
+        pnlAdminMain.add(pnlAdminMainTab, java.awt.BorderLayout.CENTER);
+
+        mainPanel.add(pnlAdminMain, "card6");
+
+        pnlCusMain.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout pnlCusMainHomeLayout = new javax.swing.GroupLayout(pnlCusMainHome);
+        pnlCusMainHome.setLayout(pnlCusMainHomeLayout);
+        pnlCusMainHomeLayout.setHorizontalGroup(
+            pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 495, Short.MAX_VALUE)
+        );
+        pnlCusMainHomeLayout.setVerticalGroup(
+            pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 354, Short.MAX_VALUE)
+        );
+
+        pnlCusMainTab.addTab("Home", pnlCusMainHome);
 
         jLabel1.setText("ID:");
 
@@ -777,18 +847,27 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnStartupInfo;
     private javax.swing.JButton btnStartupLaunch;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel pnlAdminMain;
+    private javax.swing.JPanel pnlAdminMainHome;
+    private javax.swing.JPanel pnlAdminMainInfo;
+    private javax.swing.JTabbedPane pnlAdminMainTab;
     private javax.swing.JPanel pnlCusInfo;
     private javax.swing.JPanel pnlCusMain;
-    private javax.swing.JPanel pnlCusMainMain;
+    private javax.swing.JPanel pnlCusMainHome;
     private javax.swing.JTabbedPane pnlCusMainTab;
     private javax.swing.JPanel pnlInfo;
     private javax.swing.JPanel pnlLogin;
