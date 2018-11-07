@@ -66,6 +66,15 @@ public class restoProgram extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        txtAdminInfoMname = new javax.swing.JTextField();
+        txtAdminInfoFname = new javax.swing.JTextField();
+        txtAdminInfoLname = new javax.swing.JTextField();
+        txtAdminInfoUsername = new javax.swing.JTextField();
+        txtAdminInfoPassword = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnAdminAccountsEdit = new javax.swing.JButton();
         pnlCusMain = new javax.swing.JPanel();
         pnlCusMainTab = new javax.swing.JTabbedPane();
         pnlCusMainHome = new javax.swing.JPanel();
@@ -240,7 +249,7 @@ public class restoProgram extends javax.swing.JFrame {
         );
         pnlAdminMainHomeLayout.setVerticalGroup(
             pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGap(0, 357, Short.MAX_VALUE)
         );
 
         pnlAdminMainTab.addTab("Home", pnlAdminMainHome);
@@ -262,30 +271,99 @@ public class restoProgram extends javax.swing.JFrame {
             .addGroup(pnlAdminMainInfoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
+                    .addComponent(jLabel12)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addContainerGap(421, Short.MAX_VALUE))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtAdminInfoFname, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtAdminInfoMname)
+                        .addComponent(txtAdminInfoLname)
+                        .addComponent(txtAdminInfoUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(txtAdminInfoPassword)))
+                .addContainerGap())
         );
         pnlAdminMainInfoLayout.setVerticalGroup(
             pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAdminMainInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
+                .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtAdminInfoFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
+                .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtAdminInfoMname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
+                .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtAdminInfoLname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
+                .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtAdminInfoUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtAdminInfoPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         pnlAdminMainTab.addTab("Info", pnlAdminMainInfo);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        btnAdminAccountsEdit.setText("Edit");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAdminAccountsEdit)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(btnAdminAccountsEdit)
+                .addContainerGap())
+        );
+
+        pnlAdminMainTab.addTab("Accounts", jPanel1);
 
         pnlAdminMain.add(pnlAdminMainTab, java.awt.BorderLayout.CENTER);
 
@@ -836,6 +914,7 @@ public class restoProgram extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdminAccountsEdit;
     private javax.swing.JButton btnCusInfoCancel;
     private javax.swing.JToggleButton btnCusInfoClear;
     private javax.swing.JToggleButton btnCusInfoSave;
@@ -858,6 +937,9 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JPanel mainPanel;
@@ -872,6 +954,11 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlInfo;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlStartup;
+    private javax.swing.JTextField txtAdminInfoFname;
+    private javax.swing.JTextField txtAdminInfoLname;
+    private javax.swing.JTextField txtAdminInfoMname;
+    private javax.swing.JTextField txtAdminInfoPassword;
+    private javax.swing.JTextField txtAdminInfoUsername;
     private javax.swing.JTextField txtCusInfoFname;
     private javax.swing.JTextField txtCusInfoID;
     private javax.swing.JTextField txtCusInfoLname;
