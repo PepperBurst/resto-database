@@ -54,6 +54,10 @@ public class Admin {
         return lName;
     }
     
+    public String getUsername(){
+        return username;
+    }
+    
     public String getPassword(){
         return password;
     }
@@ -62,40 +66,72 @@ public class Admin {
         return id;
     }
     
-    public void setPassword(String newPassword){
-        connect();
+    public String setPassword(String newPassword){
+        this.connect();
         String oldPassword = password;
+        String status;
         try{
-            password = newPassword;
-            String sql = "Update Admin set adminPassword='"
-                    + password + "' where adminID='"
-                    + id + "'";
-            SQLStatement = con.prepareStatement(sql);
-            SQLStatement.execute();
+            String sql1 = "Select Username from Admin where Username='"
+                    + oldPassword + "'";
+            SQLStatement = con.prepareStatement(sql1);
+            queryResultSet = SQLStatement.executeQuery(sql1);
+            if(!queryResultSet.next()){
+                try{
+                    password = newPassword;
+                    String sql = "Update Admin set adminPassword='"
+                            + password + "' where adminID='"
+                            + id + "'";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.execute();
+                    status = "ok";
+                }catch(SQLException | HeadlessException e){
+                    System.out.println("Error:\t" + e);
+                    password  = oldPassword;
+                    status = "SQLError";
+                }
+            }else{
+                System.out.println("Password already exists");
+                password  = oldPassword;
+                status = "Exists";
+            }
         }catch(SQLException | HeadlessException e){
             System.out.println("Error:\t" + e);
             password  = oldPassword;
+            status = "SQLError";
         }
+        return status;
     }
     
     public void setUsername(String newUsername){
-        connect();
+        this.connect();
         String oldUsername = username;
         try{
-            username = newUsername;
-            String sql = "Update Admin set adminUsername='"
-                    + username + "' where adminID='"
-                    + id + "'";
-            SQLStatement = con.prepareStatement(sql);
-            SQLStatement.execute();
+            String sql1 = "Select Username from Admin where Username='"
+                    + oldUsername + "'";
+            SQLStatement = con.prepareStatement(sql1);
+            queryResultSet = SQLStatement.executeQuery(sql1);
+            if(!queryResultSet.next()){
+                try{
+                    username = newUsername;
+                    String sql = "Update Admin set adminUsername='"
+                            + username + "' where adminID='"
+                            + id + "'";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.execute();
+                }catch(SQLException | HeadlessException e){
+                    System.out.println("Error:\t" + e);
+                    username  = oldUsername;
+                }
+            }else{
+                username  = oldUsername;
+            }
         }catch(SQLException | HeadlessException e){
-            System.out.println("Error:\t" + e);
-            username  = oldUsername;
+            System.out.println("Error: \t" + e);
         }
     }
     
     public void setFname(String newFname){
-        connect();
+        this.connect();
         String oldFname = fName;
         try{
             fName = newFname;

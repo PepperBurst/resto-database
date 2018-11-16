@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -43,6 +44,7 @@ public class restoProgram extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         pnlStartup = new javax.swing.JPanel();
         btnStartupLaunch = new javax.swing.JButton();
@@ -55,11 +57,10 @@ public class restoProgram extends javax.swing.JFrame {
         lblLoginUsername = new javax.swing.JLabel();
         lblLoginPassword = new javax.swing.JLabel();
         txtLoginPassword = new javax.swing.JPasswordField();
-        pnlInfo = new javax.swing.JPanel();
-        btnStartupBack = new javax.swing.JButton();
         pnlAdminMain = new javax.swing.JPanel();
         pnlAdminMainTab = new javax.swing.JTabbedPane();
         pnlAdminMainHome = new javax.swing.JPanel();
+        btnAdminHomeViewMenu = new javax.swing.JButton();
         pnlAdminMainInfo = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -71,10 +72,14 @@ public class restoProgram extends javax.swing.JFrame {
         txtAdminInfoLname = new javax.swing.JTextField();
         txtAdminInfoUsername = new javax.swing.JTextField();
         txtAdminInfoPassword = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        btnAdminInfoRefresh = new javax.swing.JButton();
+        pnlAdminMainAccounts = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnAdminAccountsEdit = new javax.swing.JButton();
+        tblAdminAccountsCustomer = new javax.swing.JTable();
+        btnAdminAccountsView = new javax.swing.JButton();
+        btnAdminAccountsRefresh = new javax.swing.JButton();
+        pnlInfo = new javax.swing.JPanel();
+        btnStartupBack = new javax.swing.JButton();
         pnlCusMain = new javax.swing.JPanel();
         pnlCusMainTab = new javax.swing.JTabbedPane();
         pnlCusMainHome = new javax.swing.JPanel();
@@ -98,8 +103,18 @@ public class restoProgram extends javax.swing.JFrame {
         btnCusInfoCancel = new javax.swing.JButton();
         btnCusInfoClear = new javax.swing.JToggleButton();
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 382, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(480, 360));
         setResizable(false);
 
         mainPanel.setLayout(new java.awt.CardLayout());
@@ -213,43 +228,25 @@ public class restoProgram extends javax.swing.JFrame {
 
         mainPanel.add(pnlLogin, "card4");
 
-        btnStartupBack.setText("Back");
-        btnStartupBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartupBackActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlInfoLayout = new javax.swing.GroupLayout(pnlInfo);
-        pnlInfo.setLayout(pnlInfoLayout);
-        pnlInfoLayout.setHorizontalGroup(
-            pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoLayout.createSequentialGroup()
-                .addContainerGap(435, Short.MAX_VALUE)
-                .addComponent(btnStartupBack)
-                .addContainerGap())
-        );
-        pnlInfoLayout.setVerticalGroup(
-            pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoLayout.createSequentialGroup()
-                .addContainerGap(348, Short.MAX_VALUE)
-                .addComponent(btnStartupBack)
-                .addContainerGap())
-        );
-
-        mainPanel.add(pnlInfo, "card4");
-
         pnlAdminMain.setLayout(new java.awt.BorderLayout());
+
+        btnAdminHomeViewMenu.setText("View Menu");
 
         javax.swing.GroupLayout pnlAdminMainHomeLayout = new javax.swing.GroupLayout(pnlAdminMainHome);
         pnlAdminMainHome.setLayout(pnlAdminMainHomeLayout);
         pnlAdminMainHomeLayout.setHorizontalGroup(
             pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGroup(pnlAdminMainHomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAdminHomeViewMenu)
+                .addContainerGap(402, Short.MAX_VALUE))
         );
         pnlAdminMainHomeLayout.setVerticalGroup(
             pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGroup(pnlAdminMainHomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAdminHomeViewMenu)
+                .addContainerGap(320, Short.MAX_VALUE))
         );
 
         pnlAdminMainTab.addTab("Home", pnlAdminMainHome);
@@ -264,6 +261,13 @@ public class restoProgram extends javax.swing.JFrame {
 
         jLabel12.setText("Password:");
 
+        btnAdminInfoRefresh.setText("Refresh");
+        btnAdminInfoRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminInfoRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlAdminMainInfoLayout = new javax.swing.GroupLayout(pnlAdminMainInfo);
         pnlAdminMainInfo.setLayout(pnlAdminMainInfoLayout);
         pnlAdminMainInfoLayout.setHorizontalGroup(
@@ -271,19 +275,23 @@ public class restoProgram extends javax.swing.JFrame {
             .addGroup(pnlAdminMainInfoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
-                .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtAdminInfoFname, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtAdminInfoMname)
-                        .addComponent(txtAdminInfoLname)
-                        .addComponent(txtAdminInfoUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addComponent(txtAdminInfoPassword)))
+                    .addGroup(pnlAdminMainInfoLayout.createSequentialGroup()
+                        .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                        .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtAdminInfoFname, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtAdminInfoMname)
+                            .addComponent(txtAdminInfoLname)
+                            .addComponent(txtAdminInfoUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtAdminInfoPassword)))
+                    .addGroup(pnlAdminMainInfoLayout.createSequentialGroup()
+                        .addComponent(btnAdminInfoRefresh)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlAdminMainInfoLayout.setVerticalGroup(
@@ -309,65 +317,103 @@ public class restoProgram extends javax.swing.JFrame {
                 .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtAdminInfoPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addComponent(btnAdminInfoRefresh)
+                .addContainerGap())
         );
 
         pnlAdminMainTab.addTab("Info", pnlAdminMainInfo);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAdminAccountsCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Customer ID", "Customer Name"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        ));
+        tblAdminAccountsCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAdminAccountsCustomerMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-        }
+        jScrollPane1.setViewportView(tblAdminAccountsCustomer);
 
-        btnAdminAccountsEdit.setText("Edit");
+        btnAdminAccountsView.setText("View");
+        btnAdminAccountsView.setEnabled(false);
+        btnAdminAccountsView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminAccountsViewActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        btnAdminAccountsRefresh.setText("Refresh");
+        btnAdminAccountsRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminAccountsRefreshActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlAdminMainAccountsLayout = new javax.swing.GroupLayout(pnlAdminMainAccounts);
+        pnlAdminMainAccounts.setLayout(pnlAdminMainAccountsLayout);
+        pnlAdminMainAccountsLayout.setHorizontalGroup(
+            pnlAdminMainAccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminMainAccountsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlAdminMainAccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAdminAccountsEdit)
+                    .addGroup(pnlAdminMainAccountsLayout.createSequentialGroup()
+                        .addComponent(btnAdminAccountsView)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAdminAccountsRefresh)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlAdminMainAccountsLayout.setVerticalGroup(
+            pnlAdminMainAccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminMainAccountsLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(btnAdminAccountsEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(pnlAdminMainAccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdminAccountsRefresh)
+                    .addComponent(btnAdminAccountsView))
                 .addContainerGap())
         );
 
-        pnlAdminMainTab.addTab("Accounts", jPanel1);
+        pnlAdminMainTab.addTab("Accounts", pnlAdminMainAccounts);
 
         pnlAdminMain.add(pnlAdminMainTab, java.awt.BorderLayout.CENTER);
 
         mainPanel.add(pnlAdminMain, "card6");
+
+        btnStartupBack.setText("Back");
+        btnStartupBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartupBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlInfoLayout = new javax.swing.GroupLayout(pnlInfo);
+        pnlInfo.setLayout(pnlInfoLayout);
+        pnlInfoLayout.setHorizontalGroup(
+            pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoLayout.createSequentialGroup()
+                .addContainerGap(435, Short.MAX_VALUE)
+                .addComponent(btnStartupBack)
+                .addContainerGap())
+        );
+        pnlInfoLayout.setVerticalGroup(
+            pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoLayout.createSequentialGroup()
+                .addContainerGap(348, Short.MAX_VALUE)
+                .addComponent(btnStartupBack)
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlInfo, "card4");
 
         pnlCusMain.setLayout(new java.awt.BorderLayout());
 
@@ -397,6 +443,11 @@ public class restoProgram extends javax.swing.JFrame {
         jLabel6.setText("Last Name:");
 
         txtCusInfoID.setEnabled(false);
+        txtCusInfoID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCusInfoIDActionPerformed(evt);
+            }
+        });
 
         txtCusInfoUsername.setEnabled(false);
 
@@ -540,12 +591,12 @@ public class restoProgram extends javax.swing.JFrame {
 
     private void btnStartupBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartupBackActionPerformed
         // TODO add your handling code here:
-        switchPanel("pnlStartup");
+        this.switchPanel("pnlStartup");
     }//GEN-LAST:event_btnStartupBackActionPerformed
 
     private void btnStartupInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartupInfoActionPerformed
         // TODO add your handling code here:
-        switchPanel("pnlInfo");
+        this.switchPanel("pnlInfo");
     }//GEN-LAST:event_btnStartupInfoActionPerformed
 
     private void btnStartupExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartupExitActionPerformed
@@ -555,18 +606,18 @@ public class restoProgram extends javax.swing.JFrame {
 
     private void btnStartupLaunchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartupLaunchActionPerformed
         // TODO add your handling code here:
-        say("Launching app");
-        switchPanel("pnlLogin");
+        this.say("Launching app");
+        this.switchPanel("pnlLogin");
     }//GEN-LAST:event_btnStartupLaunchActionPerformed
 
     private void btnLoginLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginLoginActionPerformed
         // TODO add your handling code here:
-        connect();
+        this.connect();
         String username = txtLoginUsername.getText();
-        String password = txtLoginPassword.getText();
+        String password = String.valueOf(txtLoginPassword.getPassword());
         if(checkFields("pnlLogin")){
             try{
-                String sql = "Select adminUsername from admin where"
+                String sql = "Select * from admin where "
                 + "adminUsername='" + username + "' and "
                 + "adminPassword='" + password + "'";
                 SQLStatement = con.prepareStatement(sql);
@@ -577,12 +628,13 @@ public class restoProgram extends javax.swing.JFrame {
                     String lName = queryResultSet.getString("adminLname");
                     int id = Integer.parseInt(queryResultSet.getString(
                             "adminID"));
-                    loginHistory("admin");
-                    say("Welcom Admin " + fName + "!");
                     currAdmin =  new Admin(id, fName, mName, lName, username,
                             password);
+                    this.say("Welcom Admin " + fName + "!");
+                    this.loginHistory("admin");
+                    this.switchPanel("pnlAdminMain");
                 }else{
-                    String sqlA = "Select cusUsername from customer where"
+                    String sqlA = "Select * from customer where "
                     + "cusUsername='" + username + "' and '"
                     + "cusPassword='" + password + "'";
                     SQLStatement = con.prepareStatement(sqlA);
@@ -596,31 +648,32 @@ public class restoProgram extends javax.swing.JFrame {
                                 "cusID"));
                         currCustomer =  new Customer(id, fName, mName, lName,
                                 username, password, sex);
-                        say("Welcom Customer " + fName + "!");
-                        switchPanel("pnlCusMain");
+                        this.say("Welcom Customer " + fName + "!");
+                        this.loginHistory("customer");
+                        this.switchPanel("pnlCusMain");
                     }else{
-                        say("Invalid username and/or password!\nPlease try"
+                        this.say("Invalid username and/or password!\nPlease try"
                                 + "again");
-                        clearFields("pnlLogin");
+                        this.clearFields("pnlLogin");
                     }
                 }
             }catch(SQLException | HeadlessException e){
-                say("Error:\n" + e);
+                this.say("Error:\n" + e);
             }
         }else{
-            say("Some fields are empty!");
+            this.say("Some fields are empty!");
             //            clearFields("studentLogin");
         }
     }//GEN-LAST:event_btnLoginLoginActionPerformed
 
     private void btnLoginBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginBackActionPerformed
         // TODO add your handling code here:
-        clearFields("pnlLogin");
+        this.clearFields("pnlLogin");
     }//GEN-LAST:event_btnLoginBackActionPerformed
 
     private void btnCusInfoUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCusInfoUpdateActionPerformed
         // TODO add your handling code here:
-        enableFields("pnlCusInfo", true);
+        this.enableFields("pnlCusInfo", true);
         btnCusInfoUpdate.setEnabled(false);
         btnCusInfoSave.setEnabled(true);
         btnCusInfoCancel.setEnabled(true);
@@ -640,11 +693,11 @@ public class restoProgram extends javax.swing.JFrame {
                     SQLStatement = con.prepareStatement(sql1);
                     queryResultSet = SQLStatement.executeQuery(sql1);
                     if(queryResultSet.next()){
-                        say("Username has already been taken! Please try a"
+                        this.say("Username has already been taken! Please try a"
                                 + "different username");
                     }else{
                         try{
-                            String sql2 = "Update Customer set" + "cusFname='"
+                            String sql2 = "Update Customer set " + "cusFname='"
                                     + txtCusInfoFname.getText() + "', "
                                     + "cusMname='"
                                     + txtCusInfoMname.getText() + "', "
@@ -660,7 +713,7 @@ public class restoProgram extends javax.swing.JFrame {
                                     + "'";
                             SQLStatement = con.prepareStatement(sql2);
                             SQLStatement.execute();
-                            say("Customer information details have been"
+                            this.say("Customer information details have been"
                                     + " updated and saved!");
                             int currID = currCustomer.getID();
                             currCustomer = new Customer(
@@ -671,18 +724,18 @@ public class restoProgram extends javax.swing.JFrame {
                                     txtCusInfoUsername.getText(),
                                     txtCusInfoPassword.getText(),
                                     txtCusInfoSex.getText());
-                            enableFields("pnlCusInfo", false);
+                            this.enableFields("pnlCusInfo", false);
                             btnCusInfoUpdate.setEnabled(true);
                             btnCusInfoSave.setEnabled(false);
                             btnCusInfoCancel.setEnabled(false);
                             btnCusInfoClear.setEnabled(false);
-                            showValues("pnlCusInfo");
+                            this.showValues("pnlCusInfo");
                         }catch(SQLException | HeadlessException e){
-                            say("Error:\n" + e);
+                            this.say("Error:\n" + e);
                         }
                     }
                 }catch(SQLException | HeadlessException e){
-                    say("Error:\n" + e);
+                    this.say("Error:\n" + e);
                 }
             }
         }
@@ -698,8 +751,8 @@ public class restoProgram extends javax.swing.JFrame {
             btnCusInfoSave.setEnabled(false);
             btnCusInfoCancel.setEnabled(false);
             btnCusInfoClear.setEnabled(false);
-            say("Update cancelled!");
-            showValues("pnlCusInfo");
+            this.say("Update cancelled!");
+            this.showValues("pnlCusInfo");
         }
     }//GEN-LAST:event_btnCusInfoCancelActionPerformed
 
@@ -708,9 +761,35 @@ public class restoProgram extends javax.swing.JFrame {
         int dialogResult = JOptionPane.showConfirmDialog(null, "Confirm Action",
                 "Clear fields?", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION){
-            clearFields("pnlCusInfo");
+            this.clearFields("pnlCusInfo");
         }
     }//GEN-LAST:event_btnCusInfoClearActionPerformed
+
+    private void btnAdminAccountsRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminAccountsRefreshActionPerformed
+        // TODO add your handling code here:
+        this.viewTable("tblAdminAccountsCustomer");
+        btnAdminAccountsView.setEnabled(false);
+    }//GEN-LAST:event_btnAdminAccountsRefreshActionPerformed
+
+    private void btnAdminAccountsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminAccountsViewActionPerformed
+        // TODO add your handling code here:
+        //do edit
+        btnAdminAccountsView.setEnabled(false);
+    }//GEN-LAST:event_btnAdminAccountsViewActionPerformed
+
+    private void tblAdminAccountsCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminAccountsCustomerMouseClicked
+        // TODO add your handling code here:
+        btnAdminAccountsView.setEnabled(true);
+    }//GEN-LAST:event_tblAdminAccountsCustomerMouseClicked
+
+    private void btnAdminInfoRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminInfoRefreshActionPerformed
+        // TODO add your handling code here:
+        this.showValues("pnlAdminInfo");
+    }//GEN-LAST:event_btnAdminInfoRefreshActionPerformed
+
+    private void txtCusInfoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCusInfoIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCusInfoIDActionPerformed
     
     private void connect(){
         try{
@@ -719,7 +798,7 @@ public class restoProgram extends javax.swing.JFrame {
             String userPass =  "";
             con = DriverManager.getConnection(host, userName, userPass);
         }catch(SQLException | HeadlessException e){
-            say("Error:\n" + e);
+            this.say("Error:\n" + e);
         }
     }
     
@@ -742,6 +821,9 @@ public class restoProgram extends javax.swing.JFrame {
             case "pnlCusMain":
                 mainPanel.add(pnlCusMain);
                 break;
+            case "pnlAdminMain":
+                mainPanel.add(pnlAdminMain);
+                break;
             default:
                 break;
         }
@@ -753,7 +835,7 @@ public class restoProgram extends javax.swing.JFrame {
         switch(panel){
             case "pnlLogin":
                 return(!txtLoginUsername.getText().equals("")
-                        && !txtLoginPassword.getText().equals(""));
+                        && !String.valueOf(txtLoginPassword.getPassword()).equals(""));
             case "pnlCusInfo":
                 return(!txtCusInfoFname.getText().equals("")
                         && txtCusInfoMname.getText().equals("")
@@ -786,7 +868,7 @@ public class restoProgram extends javax.swing.JFrame {
     }
     
     private void showValues(String panel){
-        connect();
+        this.connect();
         switch(panel){
             case "pnlCusInfo":
                 txtCusInfoID.setText(Integer.toString(currCustomer.getID()));
@@ -796,6 +878,13 @@ public class restoProgram extends javax.swing.JFrame {
                 txtCusInfoUsername.setText(currCustomer.getUsername());
                 txtCusInfoPassword.setText(currCustomer.getPassword());
                 txtCusInfoSex.setText(currCustomer.getSex());
+                break;
+            case "pnlAdminInfo":
+                txtAdminInfoFname.setText(currAdmin.getFname());
+                txtAdminInfoMname.setText(currAdmin.getMname());
+                txtAdminInfoLname.setText(currAdmin.getLname());
+//                txtAdminInfoUsername.setText(currAdmin.getUsername());
+                txtAdminInfoPassword.setText(currAdmin.getPassword());
                 break;
             default:
                 break;
@@ -837,7 +926,7 @@ public class restoProgram extends javax.swing.JFrame {
         String date = cal.get(Calendar.YEAR) + "-"
                 + monthS + "-"
                 + dayS;
-        connect();
+        this.connect();
         String inType;
         String inName;
         int inId;
@@ -853,9 +942,9 @@ public class restoProgram extends javax.swing.JFrame {
                 inName = currCustomer.getFname();
                 break;
             default:
-                inType = "";
+                inType = "N/A";
                 inId = 0;
-                inName = "";
+                inName = "N/A";
                 break;
         }
         try{
@@ -868,16 +957,33 @@ public class restoProgram extends javax.swing.JFrame {
             SQLStatement.setString(3, inName);
             SQLStatement.setString(4, date);
             SQLStatement.execute();
-            say("Login recorded!");
+            this.say("Login recorded!");
         }catch(SQLException | HeadlessException e){
-            say("Error:\n" + e);
+            this.say("Error:\n" + e);
         }
-//        try{
-//            String sql = ""
-//        }catch(SQLException | HeadlessException e){
-//            say("Error:\n" + e);
-//        }
+        
     }
+    
+    private void viewTable(String table){
+        this.connect();
+        switch(table){
+            case "tblAdminAccountsCustomer":
+                try{
+                    String sql = "Select cusID, cusFname "
+                            + "from customer";
+                    SQLStatement = con.prepareStatement(sql);
+                    queryResultSet = SQLStatement.executeQuery(sql);
+                    tblAdminAccountsCustomer.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -914,7 +1020,10 @@ public class restoProgram extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdminAccountsEdit;
+    private javax.swing.JButton btnAdminAccountsRefresh;
+    private javax.swing.JButton btnAdminAccountsView;
+    private javax.swing.JButton btnAdminHomeViewMenu;
+    private javax.swing.JButton btnAdminInfoRefresh;
     private javax.swing.JButton btnCusInfoCancel;
     private javax.swing.JToggleButton btnCusInfoClear;
     private javax.swing.JToggleButton btnCusInfoSave;
@@ -937,13 +1046,13 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel pnlAdminMain;
+    private javax.swing.JPanel pnlAdminMainAccounts;
     private javax.swing.JPanel pnlAdminMainHome;
     private javax.swing.JPanel pnlAdminMainInfo;
     private javax.swing.JTabbedPane pnlAdminMainTab;
@@ -954,6 +1063,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlInfo;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlStartup;
+    private javax.swing.JTable tblAdminAccountsCustomer;
     private javax.swing.JTextField txtAdminInfoFname;
     private javax.swing.JTextField txtAdminInfoLname;
     private javax.swing.JTextField txtAdminInfoMname;
