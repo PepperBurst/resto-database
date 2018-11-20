@@ -46,6 +46,7 @@ public class restoProgram extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
+        pnlEditViewCustomer = new javax.swing.JPanel();
         pnlStartup = new javax.swing.JPanel();
         btnStartupLaunch = new javax.swing.JButton();
         btnStartupInfo = new javax.swing.JButton();
@@ -118,6 +119,19 @@ public class restoProgram extends javax.swing.JFrame {
         setResizable(false);
 
         mainPanel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout pnlEditViewCustomerLayout = new javax.swing.GroupLayout(pnlEditViewCustomer);
+        pnlEditViewCustomer.setLayout(pnlEditViewCustomerLayout);
+        pnlEditViewCustomerLayout.setHorizontalGroup(
+            pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 495, Short.MAX_VALUE)
+        );
+        pnlEditViewCustomerLayout.setVerticalGroup(
+            pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+        );
+
+        mainPanel.add(pnlEditViewCustomer, "card7");
 
         btnStartupLaunch.setText("Launch");
         btnStartupLaunch.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +260,7 @@ public class restoProgram extends javax.swing.JFrame {
             .addGroup(pnlAdminMainHomeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAdminHomeViewMenu)
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
 
         pnlAdminMainTab.addTab("Home", pnlAdminMainHome);
@@ -317,7 +331,7 @@ public class restoProgram extends javax.swing.JFrame {
                 .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtAdminInfoPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addComponent(btnAdminInfoRefresh)
                 .addContainerGap())
         );
@@ -376,7 +390,7 @@ public class restoProgram extends javax.swing.JFrame {
             pnlAdminMainAccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAdminMainAccountsLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlAdminMainAccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdminAccountsRefresh)
                     .addComponent(btnAdminAccountsView))
@@ -1060,6 +1074,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCusMain;
     private javax.swing.JPanel pnlCusMainHome;
     private javax.swing.JTabbedPane pnlCusMainTab;
+    private javax.swing.JPanel pnlEditViewCustomer;
     private javax.swing.JPanel pnlInfo;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlStartup;
