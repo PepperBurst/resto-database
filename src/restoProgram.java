@@ -25,13 +25,14 @@ public class restoProgram extends javax.swing.JFrame {
     ResultSet queryResultSet = null;
     Connection con = null;
     Admin currAdmin;
-    Customer currCustomer;
+    Customer currCustomer, editCustomer;
     /**
      * Creates new form restoProgram
      */
     public restoProgram() {
         this.currAdmin = new Admin();
         this.currCustomer = new Customer();
+        this.editCustomer = new Customer();
         initComponents();
     }
 
@@ -44,13 +45,23 @@ public class restoProgram extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
-        pnlEditViewCustomer = new javax.swing.JPanel();
         pnlStartup = new javax.swing.JPanel();
         btnStartupLaunch = new javax.swing.JButton();
         btnStartupInfo = new javax.swing.JButton();
         btnStartupExit = new javax.swing.JButton();
+        pnlAdminAddMenu = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        txtAAMName = new javax.swing.JTextField();
+        txtAAMCourse = new javax.swing.JTextField();
+        txtAAMPrice = new javax.swing.JTextField();
+        btnAAMAdd = new javax.swing.JButton();
+        btnAAMClear = new javax.swing.JButton();
+        btnAAMBack = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        txtAAMStock = new javax.swing.JTextField();
         pnlLogin = new javax.swing.JPanel();
         btnLoginBack = new javax.swing.JButton();
         btnLoginLogin = new javax.swing.JButton();
@@ -58,6 +69,28 @@ public class restoProgram extends javax.swing.JFrame {
         lblLoginUsername = new javax.swing.JLabel();
         lblLoginPassword = new javax.swing.JLabel();
         txtLoginPassword = new javax.swing.JPasswordField();
+        pnlEditViewCustomer = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txtEVCUsername = new javax.swing.JTextField();
+        txtEVCPassword = new javax.swing.JTextField();
+        txtEVCFname = new javax.swing.JTextField();
+        txtEVCMname = new javax.swing.JTextField();
+        txtEVCLname = new javax.swing.JTextField();
+        btnEVCEdit = new javax.swing.JButton();
+        btnEVCSave = new javax.swing.JButton();
+        btnEVCCancel = new javax.swing.JButton();
+        btnEVCBack = new javax.swing.JButton();
+        pnlAdminMenu = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAMenu = new javax.swing.JTable();
+        btnAMBack = new javax.swing.JButton();
+        btnAMAdd = new javax.swing.JButton();
+        btnAMEdit = new javax.swing.JButton();
+        btnAMRefresh = new javax.swing.JButton();
         pnlAdminMain = new javax.swing.JPanel();
         pnlAdminMainTab = new javax.swing.JTabbedPane();
         pnlAdminMainHome = new javax.swing.JPanel();
@@ -104,34 +137,10 @@ public class restoProgram extends javax.swing.JFrame {
         btnCusInfoCancel = new javax.swing.JButton();
         btnCusInfoClear = new javax.swing.JToggleButton();
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         mainPanel.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout pnlEditViewCustomerLayout = new javax.swing.GroupLayout(pnlEditViewCustomer);
-        pnlEditViewCustomer.setLayout(pnlEditViewCustomerLayout);
-        pnlEditViewCustomerLayout.setHorizontalGroup(
-            pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
-        );
-        pnlEditViewCustomerLayout.setVerticalGroup(
-            pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
-        );
-
-        mainPanel.add(pnlEditViewCustomer, "card7");
 
         btnStartupLaunch.setText("Launch");
         btnStartupLaunch.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +188,93 @@ public class restoProgram extends javax.swing.JFrame {
         );
 
         mainPanel.add(pnlStartup, "card2");
+
+        jLabel18.setText("Name:");
+
+        jLabel19.setText("Course:");
+
+        jLabel20.setText("Price:");
+
+        btnAAMAdd.setText("Add");
+        btnAAMAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAAMAddActionPerformed(evt);
+            }
+        });
+
+        btnAAMClear.setText("Clear");
+        btnAAMClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAAMClearActionPerformed(evt);
+            }
+        });
+
+        btnAAMBack.setText("Back");
+        btnAAMBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAAMBackActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setText("Stock:");
+
+        javax.swing.GroupLayout pnlAdminAddMenuLayout = new javax.swing.GroupLayout(pnlAdminAddMenu);
+        pnlAdminAddMenu.setLayout(pnlAdminAddMenuLayout);
+        pnlAdminAddMenuLayout.setHorizontalGroup(
+            pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminAddMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAdminAddMenuLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                        .addComponent(txtAAMName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlAdminAddMenuLayout.createSequentialGroup()
+                        .addComponent(btnAAMAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAAMClear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAAMBack))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminAddMenuLayout.createSequentialGroup()
+                        .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtAAMStock, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(txtAAMPrice)
+                            .addComponent(txtAAMCourse))))
+                .addContainerGap())
+        );
+        pnlAdminAddMenuLayout.setVerticalGroup(
+            pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminAddMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtAAMName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtAAMCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20)
+                    .addComponent(txtAAMPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(txtAAMStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+                .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAAMAdd)
+                    .addComponent(btnAAMClear)
+                    .addComponent(btnAAMBack))
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlAdminAddMenu, "card9");
 
         btnLoginBack.setText("Back");
         btnLoginBack.addActionListener(new java.awt.event.ActionListener() {
@@ -242,9 +338,226 @@ public class restoProgram extends javax.swing.JFrame {
 
         mainPanel.add(pnlLogin, "card4");
 
+        jLabel13.setText("Username:");
+
+        jLabel14.setText("Password:");
+
+        jLabel15.setText("First Name:");
+
+        jLabel16.setText("Middle Name:");
+
+        jLabel17.setText("Last Name:");
+
+        txtEVCUsername.setEditable(false);
+
+        txtEVCPassword.setEditable(false);
+
+        txtEVCFname.setEditable(false);
+
+        txtEVCMname.setEditable(false);
+
+        txtEVCLname.setEditable(false);
+
+        btnEVCEdit.setText("Edit");
+        btnEVCEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEVCEditActionPerformed(evt);
+            }
+        });
+
+        btnEVCSave.setText("Save");
+        btnEVCSave.setEnabled(false);
+        btnEVCSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEVCSaveActionPerformed(evt);
+            }
+        });
+
+        btnEVCCancel.setText("Cancel");
+        btnEVCCancel.setEnabled(false);
+        btnEVCCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEVCCancelActionPerformed(evt);
+            }
+        });
+
+        btnEVCBack.setText("Back");
+        btnEVCBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEVCBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlEditViewCustomerLayout = new javax.swing.GroupLayout(pnlEditViewCustomer);
+        pnlEditViewCustomer.setLayout(pnlEditViewCustomerLayout);
+        pnlEditViewCustomerLayout.setHorizontalGroup(
+            pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditViewCustomerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEditViewCustomerLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtEVCUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEditViewCustomerLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtEVCPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEditViewCustomerLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtEVCFname, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditViewCustomerLayout.createSequentialGroup()
+                        .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEVCLname, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(txtEVCMname)))
+                    .addGroup(pnlEditViewCustomerLayout.createSequentialGroup()
+                        .addComponent(btnEVCEdit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEVCSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEVCCancel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                        .addComponent(btnEVCBack)))
+                .addContainerGap())
+        );
+        pnlEditViewCustomerLayout.setVerticalGroup(
+            pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditViewCustomerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtEVCUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(txtEVCPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(txtEVCFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(txtEVCMname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(txtEVCLname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                .addGroup(pnlEditViewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEVCEdit)
+                    .addComponent(btnEVCSave)
+                    .addComponent(btnEVCCancel)
+                    .addComponent(btnEVCBack))
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlEditViewCustomer, "card7");
+
+        tblAMenu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Course", "Price", "Stock"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblAMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAMenuMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblAMenu);
+
+        btnAMBack.setText("Back");
+        btnAMBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAMBackActionPerformed(evt);
+            }
+        });
+
+        btnAMAdd.setText("Add");
+        btnAMAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAMAddActionPerformed(evt);
+            }
+        });
+
+        btnAMEdit.setText("Edit");
+        btnAMEdit.setEnabled(false);
+
+        btnAMRefresh.setText("Refresh");
+        btnAMRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAMRefreshActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlAdminMenuLayout = new javax.swing.GroupLayout(pnlAdminMenu);
+        pnlAdminMenu.setLayout(pnlAdminMenuLayout);
+        pnlAdminMenuLayout.setHorizontalGroup(
+            pnlAdminMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAdminMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminMenuLayout.createSequentialGroup()
+                        .addComponent(btnAMAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAMEdit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAMRefresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAMBack)))
+                .addContainerGap())
+        );
+        pnlAdminMenuLayout.setVerticalGroup(
+            pnlAdminMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAdminMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAMBack)
+                    .addComponent(btnAMAdd)
+                    .addComponent(btnAMEdit)
+                    .addComponent(btnAMRefresh))
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlAdminMenu, "card8");
+
         pnlAdminMain.setLayout(new java.awt.BorderLayout());
 
         btnAdminHomeViewMenu.setText("View Menu");
+        btnAdminHomeViewMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminHomeViewMenuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlAdminMainHomeLayout = new javax.swing.GroupLayout(pnlAdminMainHome);
         pnlAdminMainHome.setLayout(pnlAdminMainHomeLayout);
@@ -348,7 +661,15 @@ public class restoProgram extends javax.swing.JFrame {
             new String [] {
                 "Customer ID", "Customer Name"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tblAdminAccountsCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblAdminAccountsCustomerMouseClicked(evt);
@@ -787,8 +1108,38 @@ public class restoProgram extends javax.swing.JFrame {
 
     private void btnAdminAccountsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminAccountsViewActionPerformed
         // TODO add your handling code here:
-        //do edit
-        btnAdminAccountsView.setEnabled(false);
+        int selRow = tblAdminAccountsCustomer.getSelectedRow();
+        int selID = Integer.parseInt(tblAdminAccountsCustomer.getValueAt(selRow, 0).toString());
+        this.connect();
+        try{
+            String sql = "Select * from customer where cusID='" + selID + "'";
+            SQLStatement = con.prepareStatement(sql);
+            queryResultSet = SQLStatement.executeQuery(sql);
+            if(queryResultSet.next()){
+                String eCUsername = queryResultSet.getString("cusUsername");
+                String eCPassword = queryResultSet.getString("cusPassowrd");
+                String eCFname = queryResultSet.getString("cusFname");
+                String eCMname = queryResultSet.getString("cusMname");
+                String eCLname = queryResultSet.getString("cusLname");
+                String eCSex = queryResultSet.getString("cusSex");
+                editCustomer = new Customer(
+                        selID,
+                        eCFname,
+                        eCMname,
+                        eCLname,
+                        eCUsername,
+                        eCPassword,
+                        eCSex);
+                btnAdminAccountsView.setEnabled(false);
+                this.showValues("pnlEVC");
+                switchPanel("pnlEVC");
+            }else{
+                say("Customer not found in database!");
+            }
+        }catch(SQLException | HeadlessException e){
+            say("Error:\n" + e);
+            btnAdminAccountsView.setEnabled(false);
+        }
     }//GEN-LAST:event_btnAdminAccountsViewActionPerformed
 
     private void tblAdminAccountsCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminAccountsCustomerMouseClicked
@@ -804,6 +1155,118 @@ public class restoProgram extends javax.swing.JFrame {
     private void txtCusInfoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCusInfoIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCusInfoIDActionPerformed
+
+    private void btnEVCEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEVCEditActionPerformed
+        // TODO add your handling code here:
+        this.enableFields("pnlEVC", true);
+        btnEVCSave.setEnabled(true);
+        btnEVCCancel.setEnabled(true);
+        btnEVCEdit.setEnabled(false);
+    }//GEN-LAST:event_btnEVCEditActionPerformed
+
+    private void btnEVCCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEVCCancelActionPerformed
+        // TODO add your handling code here:
+        this.enableFields("pnlEVC", false);
+        btnEVCSave.setEnabled(false);
+        btnEVCCancel.setEnabled(false);
+        btnEVCEdit.setEnabled(true);
+    }//GEN-LAST:event_btnEVCCancelActionPerformed
+
+    private void btnEVCSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEVCSaveActionPerformed
+        // TODO add your handling code here:
+        if(checkFields("pnlEVC")){
+            editCustomer.setPassword(txtEVCPassword.getText());
+            editCustomer.setFname(txtEVCFname.getText());
+            editCustomer.setMname(txtEVCMname.getText());
+            editCustomer.setLname(txtEVCLname.getText());
+            this.say("Customer info updated!");
+            btnEVCSave.setEnabled(false);
+            btnEVCCancel.setEnabled(false);
+            btnEVCEdit.setEnabled(true);
+            this.enableFields("pnlEVC", false);
+        }
+    }//GEN-LAST:event_btnEVCSaveActionPerformed
+
+    private void btnEVCBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEVCBackActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlAdminMain");
+    }//GEN-LAST:event_btnEVCBackActionPerformed
+
+    private void btnAMBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAMBackActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlAdminMain");
+    }//GEN-LAST:event_btnAMBackActionPerformed
+
+    private void btnAMRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAMRefreshActionPerformed
+        // TODO add your handling code here:
+        this.viewTable("tblAMenu");
+    }//GEN-LAST:event_btnAMRefreshActionPerformed
+
+    private void tblAMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAMenuMouseClicked
+        // TODO add your handling code here:
+        btnAMEdit.setEnabled(true);
+    }//GEN-LAST:event_tblAMenuMouseClicked
+
+    private void btnAMAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAMAddActionPerformed
+        // TODO add your handling code here:
+        btnAMEdit.setEnabled(false);
+        this.switchPanel("pnlAAM");
+    }//GEN-LAST:event_btnAMAddActionPerformed
+
+    private void btnAAMAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAAMAddActionPerformed
+        // TODO add your handling code here:
+        if(checkFields("pnlAAM")){
+            String name = txtAAMName.getText();
+            String course = txtAAMCourse.getText();
+            int price = Integer.parseInt(txtAAMPrice.getText());
+            int stock = Integer.parseInt(txtAAMStock.getText());
+            try{
+                String sql1 = "Select * from menu where menuName='" +
+                        name + "'";
+                SQLStatement = con.prepareStatement(sql1);
+                queryResultSet = SQLStatement.executeQuery(sql1);
+                if(!queryResultSet.next()){
+                    try{
+                        String sql2 = "Insert into menu "
+                                + "(menuName, "
+                                + "menuCourse, "
+                                + "menuPrice, "
+                                + "menuStock) values (?, ?, ?, ?)";
+                        SQLStatement = con.prepareStatement(sql2);
+                        SQLStatement.setString(1, name);
+                        SQLStatement.setString(2, course);
+                        SQLStatement.setInt(3, price);
+                        SQLStatement.setInt(4, stock);
+                        SQLStatement.execute();
+                        this.say(name + " added to the menu!");
+                        this.clearFields("pnlAAM");
+                    }catch(SQLException | HeadlessException e){
+                        this.say("Error:\n" + e);
+                    }
+                }
+            }catch(SQLException | HeadlessException e){
+                this.say("Error:\n" + e);
+            }
+        }else{
+            this.say("Fill up all fields!");
+        }
+    }//GEN-LAST:event_btnAAMAddActionPerformed
+
+    private void btnAAMClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAAMClearActionPerformed
+        // TODO add your handling code here:
+        this.clearFields("pnlAAM");
+    }//GEN-LAST:event_btnAAMClearActionPerformed
+
+    private void btnAAMBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAAMBackActionPerformed
+        // TODO add your handling code here:
+        this.clearFields("pnlAAM");
+        this.switchPanel("pnlAM");
+    }//GEN-LAST:event_btnAAMBackActionPerformed
+
+    private void btnAdminHomeViewMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminHomeViewMenuActionPerformed
+        // TODO add your handling code here:
+        switchPanel("pnlAM");
+    }//GEN-LAST:event_btnAdminHomeViewMenuActionPerformed
     
     private void connect(){
         try{
@@ -838,6 +1301,15 @@ public class restoProgram extends javax.swing.JFrame {
             case "pnlAdminMain":
                 mainPanel.add(pnlAdminMain);
                 break;
+            case "pnlEVC":
+                mainPanel.add(pnlEditViewCustomer);
+                break;
+            case "pnlAM":
+                mainPanel.add(pnlAdminMenu);
+                break;
+            case "pnlAAM":
+                mainPanel.add(pnlAdminAddMenu);
+                break;
             default:
                 break;
         }
@@ -852,11 +1324,22 @@ public class restoProgram extends javax.swing.JFrame {
                         && !String.valueOf(txtLoginPassword.getPassword()).equals(""));
             case "pnlCusInfo":
                 return(!txtCusInfoFname.getText().equals("")
-                        && txtCusInfoMname.getText().equals("")
-                        && txtCusInfoLname.getText().equals("")
-                        && txtCusInfoUsername.getText().equals("")
-                        && txtCusInfoPassword.getText().equals("")
-                        && txtCusInfoSex.getText().equals(""));
+                        && !txtCusInfoMname.getText().equals("")
+                        && !txtCusInfoLname.getText().equals("")
+                        && !txtCusInfoUsername.getText().equals("")
+                        && !txtCusInfoPassword.getText().equals("")
+                        && !txtCusInfoSex.getText().equals(""));
+            case "pnlEVC":
+                return(!txtEVCUsername.getText().equals("")
+                        && !txtEVCPassword.getText().equals("")
+                        && !txtEVCFname.getText().equals("")
+                        && !txtEVCMname.getText().equals("")
+                        && !txtEVCLname.getText().equals(""));
+            case "pnlAAM":
+                return(!txtAAMName.getText().equals("")
+                        && !txtAAMCourse.getText().equals("")
+                        && !txtAAMPrice.getText().equals("")
+                        && !txtAAMStock.getText().equals(""));
             default:
                 break;
         }
@@ -875,6 +1358,12 @@ public class restoProgram extends javax.swing.JFrame {
                 txtCusInfoUsername.setText(null);
                 txtCusInfoPassword.setText(null);
                 txtCusInfoSex.setText(null);
+                break;
+            case "pnlAAM":
+                txtAAMName.setText(null);
+                txtAAMCourse.setText(null);
+                txtAAMPrice.setText(null);
+                txtAAMStock.setText(null);
                 break;
             default:
                 break;
@@ -900,6 +1389,13 @@ public class restoProgram extends javax.swing.JFrame {
 //                txtAdminInfoUsername.setText(currAdmin.getUsername());
                 txtAdminInfoPassword.setText(currAdmin.getPassword());
                 break;
+            case "pnlEVC":
+                txtEVCUsername.setText(editCustomer.getUsername());
+                txtEVCPassword.setText(editCustomer.getPassword());
+                txtEVCFname.setText(editCustomer.getFname());
+                txtEVCMname.setText(editCustomer.getMname());
+                txtEVCLname.setText(editCustomer.getLname());
+                break;
             default:
                 break;
         }
@@ -915,6 +1411,13 @@ public class restoProgram extends javax.swing.JFrame {
                 txtCusInfoUsername.setEnabled(enable);
                 txtCusInfoPassword.setEnabled(enable);
                 txtCusInfoSex.setEnabled(enable);
+                break;
+            case "pnlEVC":
+//                txtEVCUsername.setEditable(enable);
+                txtEVCPassword.setEditable(enable);
+                txtEVCFname.setEditable(enable);
+                txtEVCMname.setEditable(enable);
+                txtEVCLname.setEditable(enable);
                 break;
             default:
                 break;
@@ -992,6 +1495,16 @@ public class restoProgram extends javax.swing.JFrame {
                     this.say("Error:\n" + e);
                 }
                 break;
+            case "tblAMenu":
+                try{
+                    String sql = "Select * from menu";
+                    SQLStatement = con.prepareStatement(sql);
+                    queryResultSet = SQLStatement.executeQuery(sql);
+                    tblAMenu.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
             default:
                 break;
         }
@@ -1034,6 +1547,13 @@ public class restoProgram extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAAMAdd;
+    private javax.swing.JButton btnAAMBack;
+    private javax.swing.JButton btnAAMClear;
+    private javax.swing.JButton btnAMAdd;
+    private javax.swing.JButton btnAMBack;
+    private javax.swing.JButton btnAMEdit;
+    private javax.swing.JButton btnAMRefresh;
     private javax.swing.JButton btnAdminAccountsRefresh;
     private javax.swing.JButton btnAdminAccountsView;
     private javax.swing.JButton btnAdminHomeViewMenu;
@@ -1042,6 +1562,10 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnCusInfoClear;
     private javax.swing.JToggleButton btnCusInfoSave;
     private javax.swing.JToggleButton btnCusInfoUpdate;
+    private javax.swing.JButton btnEVCBack;
+    private javax.swing.JButton btnEVCCancel;
+    private javax.swing.JButton btnEVCEdit;
+    private javax.swing.JButton btnEVCSave;
     private javax.swing.JButton btnLoginBack;
     private javax.swing.JButton btnLoginLogin;
     private javax.swing.JButton btnStartupBack;
@@ -1052,7 +1576,16 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1060,16 +1593,18 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel pnlAdminAddMenu;
     private javax.swing.JPanel pnlAdminMain;
     private javax.swing.JPanel pnlAdminMainAccounts;
     private javax.swing.JPanel pnlAdminMainHome;
     private javax.swing.JPanel pnlAdminMainInfo;
     private javax.swing.JTabbedPane pnlAdminMainTab;
+    private javax.swing.JPanel pnlAdminMenu;
     private javax.swing.JPanel pnlCusInfo;
     private javax.swing.JPanel pnlCusMain;
     private javax.swing.JPanel pnlCusMainHome;
@@ -1078,7 +1613,12 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlInfo;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlStartup;
+    private javax.swing.JTable tblAMenu;
     private javax.swing.JTable tblAdminAccountsCustomer;
+    private javax.swing.JTextField txtAAMCourse;
+    private javax.swing.JTextField txtAAMName;
+    private javax.swing.JTextField txtAAMPrice;
+    private javax.swing.JTextField txtAAMStock;
     private javax.swing.JTextField txtAdminInfoFname;
     private javax.swing.JTextField txtAdminInfoLname;
     private javax.swing.JTextField txtAdminInfoMname;
@@ -1091,6 +1631,11 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JTextField txtCusInfoPassword;
     private javax.swing.JTextField txtCusInfoSex;
     private javax.swing.JTextField txtCusInfoUsername;
+    private javax.swing.JTextField txtEVCFname;
+    private javax.swing.JTextField txtEVCLname;
+    private javax.swing.JTextField txtEVCMname;
+    private javax.swing.JTextField txtEVCPassword;
+    private javax.swing.JTextField txtEVCUsername;
     private javax.swing.JPasswordField txtLoginPassword;
     private javax.swing.JTextField txtLoginUsername;
     // End of variables declaration//GEN-END:variables
