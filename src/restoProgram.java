@@ -50,6 +50,11 @@ public class restoProgram extends javax.swing.JFrame {
         btnStartupLaunch = new javax.swing.JButton();
         btnStartupInfo = new javax.swing.JButton();
         btnStartupExit = new javax.swing.JButton();
+        pnlCVM = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblCVM = new javax.swing.JTable();
+        btnCVMB = new javax.swing.JButton();
+        btnCVMR = new javax.swing.JButton();
         pnlAdminAddMenu = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -117,6 +122,7 @@ public class restoProgram extends javax.swing.JFrame {
         pnlCusMain = new javax.swing.JPanel();
         pnlCusMainTab = new javax.swing.JTabbedPane();
         pnlCusMainHome = new javax.swing.JPanel();
+        btnCMViewMenu = new javax.swing.JButton();
         pnlCusInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -188,6 +194,78 @@ public class restoProgram extends javax.swing.JFrame {
         );
 
         mainPanel.add(pnlStartup, "card2");
+
+        pnlCVM.setPreferredSize(new java.awt.Dimension(500, 382));
+
+        tblCVM.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Course", "Price", "Stock"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblCVM);
+
+        btnCVMB.setText("Back");
+        btnCVMB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCVMBActionPerformed(evt);
+            }
+        });
+
+        btnCVMR.setText("Refresh");
+        btnCVMR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCVMRActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlCVMLayout = new javax.swing.GroupLayout(pnlCVM);
+        pnlCVM.setLayout(pnlCVMLayout);
+        pnlCVMLayout.setHorizontalGroup(
+            pnlCVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCVMLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCVMLayout.createSequentialGroup()
+                        .addComponent(btnCVMR)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCVMB)))
+                .addContainerGap())
+        );
+        pnlCVMLayout.setVerticalGroup(
+            pnlCVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCVMLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCVMB)
+                    .addComponent(btnCVMR))
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlCVM, "card10");
 
         jLabel18.setText("Name:");
 
@@ -752,15 +830,28 @@ public class restoProgram extends javax.swing.JFrame {
 
         pnlCusMain.setLayout(new java.awt.BorderLayout());
 
+        btnCMViewMenu.setText("View Menu");
+        btnCMViewMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCMViewMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCusMainHomeLayout = new javax.swing.GroupLayout(pnlCusMainHome);
         pnlCusMainHome.setLayout(pnlCusMainHomeLayout);
         pnlCusMainHomeLayout.setHorizontalGroup(
             pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGroup(pnlCusMainHomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnCMViewMenu)
+                .addContainerGap(402, Short.MAX_VALUE))
         );
         pnlCusMainHomeLayout.setVerticalGroup(
             pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGroup(pnlCusMainHomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnCMViewMenu)
+                .addContainerGap(320, Short.MAX_VALUE))
         );
 
         pnlCusMainTab.addTab("Home", pnlCusMainHome);
@@ -1265,8 +1356,23 @@ public class restoProgram extends javax.swing.JFrame {
 
     private void btnAdminHomeViewMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminHomeViewMenuActionPerformed
         // TODO add your handling code here:
-        switchPanel("pnlAM");
+        this.switchPanel("pnlAM");
     }//GEN-LAST:event_btnAdminHomeViewMenuActionPerformed
+
+    private void btnCMViewMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCMViewMenuActionPerformed
+        // TODO add your handling code h
+        this.switchPanel("pnlCVM");
+    }//GEN-LAST:event_btnCMViewMenuActionPerformed
+
+    private void btnCVMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCVMBActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlCusMain");
+    }//GEN-LAST:event_btnCVMBActionPerformed
+
+    private void btnCVMRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCVMRActionPerformed
+        // TODO add your handling code here:
+        this.viewTable("tblCVM");
+    }//GEN-LAST:event_btnCVMRActionPerformed
     
     private void connect(){
         try{
@@ -1309,6 +1415,9 @@ public class restoProgram extends javax.swing.JFrame {
                 break;
             case "pnlAAM":
                 mainPanel.add(pnlAdminAddMenu);
+                break;
+            case "pnlCVM":
+                mainPanel.add(pnlCVM);
                 break;
             default:
                 break;
@@ -1505,6 +1614,17 @@ public class restoProgram extends javax.swing.JFrame {
                     this.say("Error:\n" + e);
                 }
                 break;
+            case "tblCVM":
+                try{
+                    String sql = "Select * from menu";
+                    SQLStatement = con.prepareStatement(sql);
+                    queryResultSet = SQLStatement.executeQuery(sql);
+                    tblCVM.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }
+                catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
             default:
                 break;
         }
@@ -1558,6 +1678,9 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnAdminAccountsView;
     private javax.swing.JButton btnAdminHomeViewMenu;
     private javax.swing.JButton btnAdminInfoRefresh;
+    private javax.swing.JButton btnCMViewMenu;
+    private javax.swing.JButton btnCVMB;
+    private javax.swing.JButton btnCVMR;
     private javax.swing.JButton btnCusInfoCancel;
     private javax.swing.JToggleButton btnCusInfoClear;
     private javax.swing.JToggleButton btnCusInfoSave;
@@ -1595,6 +1718,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JPanel mainPanel;
@@ -1605,6 +1729,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlAdminMainInfo;
     private javax.swing.JTabbedPane pnlAdminMainTab;
     private javax.swing.JPanel pnlAdminMenu;
+    private javax.swing.JPanel pnlCVM;
     private javax.swing.JPanel pnlCusInfo;
     private javax.swing.JPanel pnlCusMain;
     private javax.swing.JPanel pnlCusMainHome;
@@ -1615,6 +1740,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlStartup;
     private javax.swing.JTable tblAMenu;
     private javax.swing.JTable tblAdminAccountsCustomer;
+    private javax.swing.JTable tblCVM;
     private javax.swing.JTextField txtAAMCourse;
     private javax.swing.JTextField txtAAMName;
     private javax.swing.JTextField txtAAMPrice;
