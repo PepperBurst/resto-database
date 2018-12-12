@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2018 at 02:40 PM
+-- Generation Time: Dec 12, 2018 at 05:59 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -149,6 +149,32 @@ CREATE TABLE `reserveform` (
   `reserveSeats` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservelist`
+--
+
+CREATE TABLE `reservelist` (
+  `reserveID` int(32) NOT NULL,
+  `tblID` int(32) NOT NULL,
+  `cusID` int(32) NOT NULL,
+  `reserveStart` time NOT NULL,
+  `reserveEnd` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tables`
+--
+
+CREATE TABLE `tables` (
+  `tblID` int(32) NOT NULL,
+  `tblInUse` tinyint(1) NOT NULL,
+  `tblSeats` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -184,6 +210,18 @@ ALTER TABLE `reserveform`
   ADD PRIMARY KEY (`reserveID`);
 
 --
+-- Indexes for table `reservelist`
+--
+ALTER TABLE `reservelist`
+  ADD PRIMARY KEY (`reserveID`);
+
+--
+-- Indexes for table `tables`
+--
+ALTER TABLE `tables`
+  ADD PRIMARY KEY (`tblID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -216,6 +254,18 @@ ALTER TABLE `menu`
 --
 ALTER TABLE `reserveform`
   MODIFY `reserveID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `reservelist`
+--
+ALTER TABLE `reservelist`
+  MODIFY `reserveID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tables`
+--
+ALTER TABLE `tables`
+  MODIFY `tblID` int(32) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
