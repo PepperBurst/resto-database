@@ -57,6 +57,10 @@ public class restoProgram extends javax.swing.JFrame {
         tblCVM = new javax.swing.JTable();
         btnCVMB = new javax.swing.JButton();
         btnCVMR = new javax.swing.JButton();
+        pnlRS = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnRSBack = new javax.swing.JButton();
         pnlRT = new javax.swing.JPanel();
         btnRTBack = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -277,6 +281,58 @@ public class restoProgram extends javax.swing.JFrame {
         );
 
         mainPanel.add(pnlCVM, "card10");
+
+        pnlRS.setMaximumSize(new java.awt.Dimension(500, 382));
+        pnlRS.setMinimumSize(new java.awt.Dimension(500, 382));
+        pnlRS.setPreferredSize(new java.awt.Dimension(500, 382));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTable1);
+
+        btnRSBack.setText("Back");
+
+        javax.swing.GroupLayout pnlRSLayout = new javax.swing.GroupLayout(pnlRS);
+        pnlRS.setLayout(pnlRSLayout);
+        pnlRSLayout.setHorizontalGroup(
+            pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRSLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRSBack)))
+                .addContainerGap())
+        );
+        pnlRSLayout.setVerticalGroup(
+            pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRSBack)
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlRS, "card12");
 
         pnlRT.setMaximumSize(new java.awt.Dimension(500, 382));
         pnlRT.setMinimumSize(new java.awt.Dimension(500, 382));
@@ -1865,6 +1921,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnEVCSave;
     private javax.swing.JButton btnLoginBack;
     private javax.swing.JButton btnLoginLogin;
+    private javax.swing.JButton btnRSBack;
     private javax.swing.JButton btnRTBack;
     private javax.swing.JButton btnRTRefresh;
     private javax.swing.JButton btnRTReserveTable;
@@ -1897,6 +1954,8 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JPanel mainPanel;
@@ -1915,6 +1974,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEditViewCustomer;
     private javax.swing.JPanel pnlInfo;
     private javax.swing.JPanel pnlLogin;
+    private javax.swing.JPanel pnlRS;
     private javax.swing.JPanel pnlRT;
     private javax.swing.JPanel pnlStartup;
     private javax.swing.JTable tblAMenu;

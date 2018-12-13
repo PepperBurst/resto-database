@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2018 at 05:59 PM
+-- Generation Time: Dec 13, 2018 at 03:54 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -143,7 +143,7 @@ CREATE TABLE `reserveform` (
   `reserveID` int(32) NOT NULL,
   `cusID` int(32) NOT NULL,
   `cusFname` varchar(32) NOT NULL,
-  `reserveTable` int(32) NOT NULL,
+  `tblID` int(32) NOT NULL,
   `reserveDate` date NOT NULL,
   `reserveTime` varchar(32) NOT NULL,
   `reserveSeats` int(32) NOT NULL
@@ -156,11 +156,7 @@ CREATE TABLE `reserveform` (
 --
 
 CREATE TABLE `reservelist` (
-  `reserveID` int(32) NOT NULL,
-  `tblID` int(32) NOT NULL,
-  `cusID` int(32) NOT NULL,
-  `reserveStart` time NOT NULL,
-  `reserveEnd` time NOT NULL
+  `rslistID` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -213,7 +209,7 @@ ALTER TABLE `reserveform`
 -- Indexes for table `reservelist`
 --
 ALTER TABLE `reservelist`
-  ADD PRIMARY KEY (`reserveID`);
+  ADD PRIMARY KEY (`rslistID`);
 
 --
 -- Indexes for table `tables`
@@ -259,7 +255,7 @@ ALTER TABLE `reserveform`
 -- AUTO_INCREMENT for table `reservelist`
 --
 ALTER TABLE `reservelist`
-  MODIFY `reserveID` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `rslistID` int(32) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tables`
