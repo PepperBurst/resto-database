@@ -1,10 +1,12 @@
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -59,8 +61,15 @@ public class restoProgram extends javax.swing.JFrame {
         btnCVMR = new javax.swing.JButton();
         pnlRS = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRS = new javax.swing.JTable();
         btnRSBack = new javax.swing.JButton();
+        btnRSRefresh = new javax.swing.JButton();
+        btnReserveRS = new javax.swing.JButton();
+        jdcRS = new com.toedter.calendar.JDateChooser();
+        cmbHR = new javax.swing.JComboBox<>();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        txtNumSeatsRS = new javax.swing.JTextField();
         pnlRT = new javax.swing.JPanel();
         btnRTBack = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -286,28 +295,48 @@ public class restoProgram extends javax.swing.JFrame {
         pnlRS.setMinimumSize(new java.awt.Dimension(500, 382));
         pnlRS.setPreferredSize(new java.awt.Dimension(500, 382));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Start Time", "End Time", "Reserve Date"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(tblRS);
 
         btnRSBack.setText("Back");
+
+        btnRSRefresh.setText("Refresh");
+        btnRSRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRSRefreshActionPerformed(evt);
+            }
+        });
+
+        btnReserveRS.setText("Reserve");
+        btnReserveRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReserveRSActionPerformed(evt);
+            }
+        });
+
+        cmbHR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21" }));
+
+        jLabel22.setText("Time:");
+
+        jLabel23.setText("Seats:");
 
         javax.swing.GroupLayout pnlRSLayout = new javax.swing.GroupLayout(pnlRS);
         pnlRS.setLayout(pnlRSLayout);
@@ -317,8 +346,22 @@ public class restoProgram extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRSLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(pnlRSLayout.createSequentialGroup()
+                        .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRSRefresh)
+                            .addComponent(jLabel22))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jdcRS, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlRSLayout.createSequentialGroup()
+                                .addComponent(cmbHR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumSeatsRS)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReserveRS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRSBack)))
                 .addContainerGap())
         );
@@ -326,9 +369,20 @@ public class restoProgram extends javax.swing.JFrame {
             pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRSLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbHR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23)
+                    .addComponent(txtNumSeatsRS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRSBack)
+                .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRSBack)
+                        .addComponent(btnRSRefresh)
+                        .addComponent(btnReserveRS))
+                    .addComponent(jdcRS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -374,6 +428,9 @@ public class restoProgram extends javax.swing.JFrame {
         tblRT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblRTMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblRTMouseEntered(evt);
             }
         });
         jScrollPane4.setViewportView(tblRT);
@@ -1211,11 +1268,15 @@ public class restoProgram extends javax.swing.JFrame {
         String password = String.valueOf(txtLoginPassword.getPassword());
         if(checkFields("pnlLogin")){
             try{
+//                String sql = "Select * from admin where "
+//                + "adminUsernax`me='" + username + "' and "
+//                + "adminPassword='" + password + "'";
                 String sql = "Select * from admin where "
-                + "adminUsername='" + username + "' and "
-                + "adminPassword='" + password + "'";
+                        + "adminUsername = ? and adminPassword = ?";
                 SQLStatement = con.prepareStatement(sql);
-                queryResultSet = SQLStatement.executeQuery(sql);
+                SQLStatement.setString(1, username);
+                SQLStatement.setString(2, password);
+                queryResultSet = SQLStatement.executeQuery();
                 if(queryResultSet.next()){
                     String fName = queryResultSet.getString("adminFname");
                     String mName = queryResultSet.getString("adminMname");
@@ -1224,15 +1285,19 @@ public class restoProgram extends javax.swing.JFrame {
                             "adminID"));
                     currAdmin =  new Admin(id, fName, mName, lName, username,
                             password);
-                    this.say("Welcom Admin " + fName + "!");
+                    this.say("Welcome Admin " + fName + "!");
                     this.loginHistory("admin");
                     this.switchPanel("pnlAdminMain");
                 }else{
+//                    String sqlA = "Select * from customer where "
+//                    + "cusUsername='" + username + "' and '"
+//                    + "cusPassword='" + password + "'";
                     String sqlA = "Select * from customer where "
-                    + "cusUsername='" + username + "' and '"
-                    + "cusPassword='" + password + "'";
+                            + "cusUsername = ? and cusPassword = ?";
                     SQLStatement = con.prepareStatement(sqlA);
-                    queryResultSet = SQLStatement.executeQuery(sqlA);
+                    SQLStatement.setString(1, username);
+                    SQLStatement.setString(2, password);
+                    queryResultSet = SQLStatement.executeQuery();
                     if(queryResultSet.next()){
                         String fName = queryResultSet.getString("cusFname");
                         String mName = queryResultSet.getString("cusMname");
@@ -1242,7 +1307,7 @@ public class restoProgram extends javax.swing.JFrame {
                                 "cusID"));
                         currCustomer =  new Customer(id, fName, mName, lName,
                                 username, password, sex);
-                        this.say("Welcom Customer " + fName + "!");
+                        this.say("Welcome Customer " + fName + "!");
                         this.loginHistory("customer");
                         this.switchPanel("pnlCusMain");
                     }else{
@@ -1285,7 +1350,7 @@ public class restoProgram extends javax.swing.JFrame {
                     String sql1 = "Select from Customer where cusUsername='"
                             + txtCusInfoUsername.getText() + "'";
                     SQLStatement = con.prepareStatement(sql1);
-                    queryResultSet = SQLStatement.executeQuery(sql1);
+                    queryResultSet = SQLStatement.executeQuery();
                     if(queryResultSet.next()){
                         this.say("Username has already been taken! Please try a"
                                 + "different username");
@@ -1373,7 +1438,7 @@ public class restoProgram extends javax.swing.JFrame {
         try{
             String sql = "Select * from customer where cusID='" + selID + "'";
             SQLStatement = con.prepareStatement(sql);
-            queryResultSet = SQLStatement.executeQuery(sql);
+            queryResultSet = SQLStatement.executeQuery();
             if(queryResultSet.next()){
                 String eCUsername = queryResultSet.getString("cusUsername");
                 String eCPassword = queryResultSet.getString("cusPassowrd");
@@ -1483,7 +1548,7 @@ public class restoProgram extends javax.swing.JFrame {
                 String sql1 = "Select * from menu where menuName='" +
                         name + "'";
                 SQLStatement = con.prepareStatement(sql1);
-                queryResultSet = SQLStatement.executeQuery(sql1);
+                queryResultSet = SQLStatement.executeQuery();
                 if(!queryResultSet.next()){
                     try{
                         String sql2 = "Insert into menu "
@@ -1560,7 +1625,7 @@ public class restoProgram extends javax.swing.JFrame {
     private void tblRTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRTMouseClicked
         // TODO add your handling code here:
         btnRTReserveTable.setEnabled(true);
-        btnRTReserveTable.setEnabled(false);
+//        btnRTReserveTable.setEnabled(false);
     }//GEN-LAST:event_tblRTMouseClicked
 
     private void btnRTReserveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTReserveTableActionPerformed
@@ -1577,17 +1642,80 @@ public class restoProgram extends javax.swing.JFrame {
                 String sql = "Select * from tables where tblID='"
                         + selID + "'";
                 SQLStatement = con.prepareStatement(sql);
-                queryResultSet = SQLStatement.executeQuery(sql);
+                queryResultSet = SQLStatement.executeQuery();
                 if(queryResultSet.next()){
                     int seats = queryResultSet.getInt("tblSeats");
                     selTable = new Tables(selID, false, seats);
-                    //go to next shit
+                    this.switchPanel("pnlRS");
                 }
             }catch(SQLException | HeadlessException e){
                 this.say("Error:\n" + e);
             }
         }
     }//GEN-LAST:event_btnRTReserveTableActionPerformed
+
+    private void btnRSRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSRefreshActionPerformed
+        // TODO add your handling code here:
+        this.viewTable("tblRS");
+    }//GEN-LAST:event_btnRSRefreshActionPerformed
+
+    private void btnReserveRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReserveRSActionPerformed
+        // TODO add your handling code here:
+        connect();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        String date = sdf.format(jdcRS.getDate());
+        Date thisDate = sdf.parse(date);
+        int startTime = Integer.parseInt(cmbHR.getSelectedItem().toString());
+        int numSeats = Integer.parseInt(txtNumSeatsRS.getText());
+        this.say(Integer.toString(numSeats));
+        this.say(Integer.toString(selTable.getSeats()));
+        try{
+            if(numSeats <= selTable.getSeats()){
+                try{
+                    String sql = "Select * from reserveList where tblID=? and "
+                            + "startTime=? and rslDate=?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, selTable.getID());
+                    SQLStatement.setInt(2, startTime);
+//                    SQLStatement.setDate(3, new java.sql.Date(sdf.parse(date))));
+                    queryResultSet = SQLStatement.executeQuery();
+                    if(!queryResultSet.next()){
+                        sql = "Insert into reserveList(?, ?, ?, ?, ?, ?, ?) "
+                                + "values(?, ?, ?, ?, ?, ?)";
+                        SQLStatement = con.prepareStatement(sql);
+                        SQLStatement.setString(1, "tblID");
+                        SQLStatement.setString(2, "cusID");
+                        SQLStatement.setString(3, "cusFname");
+                        SQLStatement.setString(4, "startTime");
+                        SQLStatement.setString(5, "endTime");
+                        SQLStatement.setString(6, "rslDate");
+                        SQLStatement.setString(7, "resSeats");
+                        SQLStatement.setInt(8, selTable.getID());
+                        SQLStatement.setInt(9, currCustomer.getID());
+                        SQLStatement.setString(10, currCustomer.getFname());
+                        SQLStatement.setInt(11, startTime);
+                        SQLStatement.setInt(12, startTime + 1);
+                        SQLStatement.setDate(13, new java.sql.Date(Long.parseLong(date)));
+                        SQLStatement.setInt(14, numSeats);
+                        SQLStatement.executeUpdate();
+                        this.say("Reserve successful!");
+                    }else{
+                        this.say("Table reserved in that date & time");
+                    }
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+            }else{
+                this.say("Not enough available seats");
+            }
+        }catch(NullPointerException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnReserveRSActionPerformed
+
+    private void tblRTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRTMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblRTMouseEntered
     
     private void connect(){
         try{
@@ -1636,6 +1764,9 @@ public class restoProgram extends javax.swing.JFrame {
                 break;
             case "pnlRT":
                 mainPanel.add(pnlRT);
+                break;
+            case "pnlRS":
+                mainPanel.add(pnlRS);
                 break;
             default:
                 break;
@@ -1816,7 +1947,7 @@ public class restoProgram extends javax.swing.JFrame {
                     String sql = "Select cusID, cusFname "
                             + "from customer";
                     SQLStatement = con.prepareStatement(sql);
-                    queryResultSet = SQLStatement.executeQuery(sql);
+                    queryResultSet = SQLStatement.executeQuery();
                     tblAdminAccountsCustomer.setModel(DbUtils.resultSetToTableModel(queryResultSet));
                 }catch(SQLException | HeadlessException e){
                     this.say("Error:\n" + e);
@@ -1826,7 +1957,7 @@ public class restoProgram extends javax.swing.JFrame {
                 try{
                     String sql = "Select * from menu";
                     SQLStatement = con.prepareStatement(sql);
-                    queryResultSet = SQLStatement.executeQuery(sql);
+                    queryResultSet = SQLStatement.executeQuery();
                     tblAMenu.setModel(DbUtils.resultSetToTableModel(queryResultSet));
                 }catch(SQLException | HeadlessException e){
                     this.say("Error:\n" + e);
@@ -1836,7 +1967,7 @@ public class restoProgram extends javax.swing.JFrame {
                 try{
                     String sql = "Select * from menu";
                     SQLStatement = con.prepareStatement(sql);
-                    queryResultSet = SQLStatement.executeQuery(sql);
+                    queryResultSet = SQLStatement.executeQuery();
                     tblCVM.setModel(DbUtils.resultSetToTableModel(queryResultSet));
                 }
                 catch(SQLException | HeadlessException e){
@@ -1847,13 +1978,28 @@ public class restoProgram extends javax.swing.JFrame {
                 try{
                     String sql = "Select * from tables";
                     SQLStatement = con.prepareStatement(sql);
-                    queryResultSet = SQLStatement.executeQuery(sql);
+                    queryResultSet = SQLStatement.executeQuery();
                     tblRT.setModel(DbUtils.resultSetToTableModel(queryResultSet));
                 }
                 catch(SQLException | HeadlessException e){
                     this.say("Error:\n" + e);
                 }
-                break;    
+                break;
+            case "tblRS":
+                try{
+                    String sql = "Select ?,?,? from reserveList where tblID=?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setString(1, "startTime");
+                    SQLStatement.setString(2, "endTime");
+                    SQLStatement.setString(3, "rslDate");
+                    SQLStatement.setInt(4, selTable.getID());
+                    queryResultSet = SQLStatement.executeQuery();
+                    tblRT.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }
+                catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
             default:
                 break;
         }
@@ -1922,13 +2068,16 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnLoginBack;
     private javax.swing.JButton btnLoginLogin;
     private javax.swing.JButton btnRSBack;
+    private javax.swing.JButton btnRSRefresh;
     private javax.swing.JButton btnRTBack;
     private javax.swing.JButton btnRTRefresh;
     private javax.swing.JButton btnRTReserveTable;
+    private javax.swing.JButton btnReserveRS;
     private javax.swing.JButton btnStartupBack;
     private javax.swing.JButton btnStartupExit;
     private javax.swing.JButton btnStartupInfo;
     private javax.swing.JButton btnStartupLaunch;
+    private javax.swing.JComboBox<String> cmbHR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1943,6 +2092,8 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1955,7 +2106,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
+    private com.toedter.calendar.JDateChooser jdcRS;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JPanel mainPanel;
@@ -1980,6 +2131,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JTable tblAMenu;
     private javax.swing.JTable tblAdminAccountsCustomer;
     private javax.swing.JTable tblCVM;
+    private javax.swing.JTable tblRS;
     private javax.swing.JTable tblRT;
     private javax.swing.JTextField txtAAMCourse;
     private javax.swing.JTextField txtAAMName;
@@ -2004,5 +2156,6 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JTextField txtEVCUsername;
     private javax.swing.JPasswordField txtLoginPassword;
     private javax.swing.JTextField txtLoginUsername;
+    private javax.swing.JTextField txtNumSeatsRS;
     // End of variables declaration//GEN-END:variables
 }

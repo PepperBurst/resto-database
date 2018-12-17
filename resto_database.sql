@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2018 at 03:54 AM
+-- Generation Time: Dec 17, 2018 at 04:50 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -91,7 +91,10 @@ INSERT INTO `loginhistory` (`loginHistID`, `loginHistType`, `loginHistAccountID`
 (3, 'admin', 1, 'test1', '2018-10-22'),
 (4, 'admin', 1, 'test1', '2018-10-22'),
 (5, 'admin', 1, 'test1', '2018-10-22'),
-(6, 'admin', 1, 'test1', '2018-10-22');
+(6, 'admin', 1, 'test1', '2018-10-22'),
+(7, 'customer', 1, 'test1', '2018-11-17'),
+(8, 'customer', 1, 'test1', '2018-11-17'),
+(9, 'customer', 1, 'test1', '2018-11-17');
 
 -- --------------------------------------------------------
 
@@ -156,7 +159,14 @@ CREATE TABLE `reserveform` (
 --
 
 CREATE TABLE `reservelist` (
-  `rslistID` int(32) NOT NULL
+  `rslistID` int(32) NOT NULL,
+  `tblID` int(32) DEFAULT NULL,
+  `cusID` int(32) DEFAULT NULL,
+  `cusFname` varchar(32) DEFAULT NULL,
+  `startTime` int(32) DEFAULT NULL,
+  `endTime` int(32) DEFAULT NULL,
+  `rslDate` date DEFAULT NULL,
+  `resSeats` int(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -170,6 +180,16 @@ CREATE TABLE `tables` (
   `tblInUse` tinyint(1) NOT NULL,
   `tblSeats` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tables`
+--
+
+INSERT INTO `tables` (`tblID`, `tblInUse`, `tblSeats`) VALUES
+(1, 0, 4),
+(2, 0, 4),
+(3, 0, 2),
+(4, 0, 2);
 
 --
 -- Indexes for dumped tables
@@ -237,7 +257,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `loginhistory`
 --
 ALTER TABLE `loginhistory`
-  MODIFY `loginHistID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `loginHistID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -261,7 +281,7 @@ ALTER TABLE `reservelist`
 -- AUTO_INCREMENT for table `tables`
 --
 ALTER TABLE `tables`
-  MODIFY `tblID` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `tblID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

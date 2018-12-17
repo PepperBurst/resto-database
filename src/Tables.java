@@ -31,4 +31,12 @@ public class Tables {
         inUse = inInUse;
         seats = inSeats;
     }
+    
+    public int getID(){
+        return this.id;
+    }
+    
+    public int getSeats(){
+        return this.seats;
+    }
 }
