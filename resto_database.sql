@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2018 at 02:40 PM
+-- Generation Time: Dec 17, 2018 at 04:50 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -91,7 +91,10 @@ INSERT INTO `loginhistory` (`loginHistID`, `loginHistType`, `loginHistAccountID`
 (3, 'admin', 1, 'test1', '2018-10-22'),
 (4, 'admin', 1, 'test1', '2018-10-22'),
 (5, 'admin', 1, 'test1', '2018-10-22'),
-(6, 'admin', 1, 'test1', '2018-10-22');
+(6, 'admin', 1, 'test1', '2018-10-22'),
+(7, 'customer', 1, 'test1', '2018-11-17'),
+(8, 'customer', 1, 'test1', '2018-11-17'),
+(9, 'customer', 1, 'test1', '2018-11-17');
 
 -- --------------------------------------------------------
 
@@ -143,11 +146,50 @@ CREATE TABLE `reserveform` (
   `reserveID` int(32) NOT NULL,
   `cusID` int(32) NOT NULL,
   `cusFname` varchar(32) NOT NULL,
-  `reserveTable` int(32) NOT NULL,
+  `tblID` int(32) NOT NULL,
   `reserveDate` date NOT NULL,
   `reserveTime` varchar(32) NOT NULL,
   `reserveSeats` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservelist`
+--
+
+CREATE TABLE `reservelist` (
+  `rslistID` int(32) NOT NULL,
+  `tblID` int(32) DEFAULT NULL,
+  `cusID` int(32) DEFAULT NULL,
+  `cusFname` varchar(32) DEFAULT NULL,
+  `startTime` int(32) DEFAULT NULL,
+  `endTime` int(32) DEFAULT NULL,
+  `rslDate` date DEFAULT NULL,
+  `resSeats` int(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tables`
+--
+
+CREATE TABLE `tables` (
+  `tblID` int(32) NOT NULL,
+  `tblInUse` tinyint(1) NOT NULL,
+  `tblSeats` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tables`
+--
+
+INSERT INTO `tables` (`tblID`, `tblInUse`, `tblSeats`) VALUES
+(1, 0, 4),
+(2, 0, 4),
+(3, 0, 2),
+(4, 0, 2);
 
 --
 -- Indexes for dumped tables
@@ -184,6 +226,18 @@ ALTER TABLE `reserveform`
   ADD PRIMARY KEY (`reserveID`);
 
 --
+-- Indexes for table `reservelist`
+--
+ALTER TABLE `reservelist`
+  ADD PRIMARY KEY (`rslistID`);
+
+--
+-- Indexes for table `tables`
+--
+ALTER TABLE `tables`
+  ADD PRIMARY KEY (`tblID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -203,7 +257,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `loginhistory`
 --
 ALTER TABLE `loginhistory`
-  MODIFY `loginHistID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `loginHistID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -216,6 +270,18 @@ ALTER TABLE `menu`
 --
 ALTER TABLE `reserveform`
   MODIFY `reserveID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `reservelist`
+--
+ALTER TABLE `reservelist`
+  MODIFY `rslistID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tables`
+--
+ALTER TABLE `tables`
+  MODIFY `tblID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

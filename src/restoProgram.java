@@ -1,10 +1,12 @@
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -26,6 +28,7 @@ public class restoProgram extends javax.swing.JFrame {
     Connection con = null;
     Admin currAdmin;
     Customer currCustomer, editCustomer;
+    Tables selTable;
     /**
      * Creates new form restoProgram
      */
@@ -33,6 +36,7 @@ public class restoProgram extends javax.swing.JFrame {
         this.currAdmin = new Admin();
         this.currCustomer = new Customer();
         this.editCustomer = new Customer();
+        this.selTable = new Tables();
         initComponents();
     }
 
@@ -50,11 +54,35 @@ public class restoProgram extends javax.swing.JFrame {
         btnStartupLaunch = new javax.swing.JButton();
         btnStartupInfo = new javax.swing.JButton();
         btnStartupExit = new javax.swing.JButton();
+        pnlARS = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblARS = new javax.swing.JTable();
+        btnARSBack = new javax.swing.JButton();
+        btnARSRefresh = new javax.swing.JButton();
+        btnARSBook = new javax.swing.JButton();
+        btnARSCancel = new javax.swing.JButton();
         pnlCVM = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCVM = new javax.swing.JTable();
         btnCVMB = new javax.swing.JButton();
         btnCVMR = new javax.swing.JButton();
+        pnlRS = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblRS = new javax.swing.JTable();
+        btnRSBack = new javax.swing.JButton();
+        btnRSRefresh = new javax.swing.JButton();
+        btnReserveRS = new javax.swing.JButton();
+        jdcRS = new com.toedter.calendar.JDateChooser();
+        cmbHR = new javax.swing.JComboBox<>();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        txtNumSeatsRS = new javax.swing.JTextField();
+        pnlRT = new javax.swing.JPanel();
+        btnRTBack = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblRT = new javax.swing.JTable();
+        btnRTRefresh = new javax.swing.JButton();
+        btnRTReserveTable = new javax.swing.JButton();
         pnlAdminAddMenu = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -100,6 +128,7 @@ public class restoProgram extends javax.swing.JFrame {
         pnlAdminMainTab = new javax.swing.JTabbedPane();
         pnlAdminMainHome = new javax.swing.JPanel();
         btnAdminHomeViewMenu = new javax.swing.JButton();
+        btnRLAM = new javax.swing.JButton();
         pnlAdminMainInfo = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -123,7 +152,7 @@ public class restoProgram extends javax.swing.JFrame {
         pnlCusMainTab = new javax.swing.JTabbedPane();
         pnlCusMainHome = new javax.swing.JPanel();
         btnCMViewMenu = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCMReserveTable = new javax.swing.JButton();
         pnlCusInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -147,6 +176,8 @@ public class restoProgram extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        mainPanel.setMaximumSize(new java.awt.Dimension(500, 382));
+        mainPanel.setPreferredSize(new java.awt.Dimension(500, 382));
         mainPanel.setLayout(new java.awt.CardLayout());
 
         btnStartupLaunch.setText("Launch");
@@ -181,7 +212,7 @@ public class restoProgram extends javax.swing.JFrame {
                 .addComponent(btnStartupInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnStartupExit)
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(340, Short.MAX_VALUE))
         );
         pnlStartupLayout.setVerticalGroup(
             pnlStartupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,6 +226,107 @@ public class restoProgram extends javax.swing.JFrame {
         );
 
         mainPanel.add(pnlStartup, "card2");
+
+        pnlARS.setMaximumSize(new java.awt.Dimension(500, 382));
+        pnlARS.setMinimumSize(new java.awt.Dimension(500, 382));
+        pnlARS.setPreferredSize(new java.awt.Dimension(500, 382));
+
+        tblARS.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Table", "Customer ID", "Customer Name", "Start", "End", "Date", "Seats"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblARS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblARSMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(tblARS);
+
+        btnARSBack.setText("Back");
+
+        btnARSRefresh.setText("Refresh");
+        btnARSRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnARSRefreshActionPerformed(evt);
+            }
+        });
+
+        btnARSBook.setText("Book");
+        btnARSBook.setEnabled(false);
+        btnARSBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnARSBookActionPerformed(evt);
+            }
+        });
+
+        btnARSCancel.setText("Cancel");
+        btnARSCancel.setEnabled(false);
+        btnARSCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnARSCancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlARSLayout = new javax.swing.GroupLayout(pnlARS);
+        pnlARS.setLayout(pnlARSLayout);
+        pnlARSLayout.setHorizontalGroup(
+            pnlARSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlARSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnARSRefresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnARSBook)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnARSCancel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                .addComponent(btnARSBack)
+                .addContainerGap())
+            .addGroup(pnlARSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlARSLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        pnlARSLayout.setVerticalGroup(
+            pnlARSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlARSLayout.createSequentialGroup()
+                .addContainerGap(348, Short.MAX_VALUE)
+                .addGroup(pnlARSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnARSBack)
+                    .addComponent(btnARSRefresh)
+                    .addComponent(btnARSBook)
+                    .addComponent(btnARSCancel))
+                .addContainerGap())
+            .addGroup(pnlARSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlARSLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(85, Short.MAX_VALUE)))
+        );
+
+        mainPanel.add(pnlARS, "card13");
 
         pnlCVM.setPreferredSize(new java.awt.Dimension(500, 382));
 
@@ -268,6 +400,203 @@ public class restoProgram extends javax.swing.JFrame {
 
         mainPanel.add(pnlCVM, "card10");
 
+        pnlRS.setMaximumSize(new java.awt.Dimension(500, 382));
+        pnlRS.setMinimumSize(new java.awt.Dimension(500, 382));
+        pnlRS.setPreferredSize(new java.awt.Dimension(500, 382));
+
+        tblRS.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Start Time", "End Time", "Reserve Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tblRS);
+
+        btnRSBack.setText("Back");
+        btnRSBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRSBackActionPerformed(evt);
+            }
+        });
+
+        btnRSRefresh.setText("Refresh");
+        btnRSRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRSRefreshActionPerformed(evt);
+            }
+        });
+
+        btnReserveRS.setText("Reserve");
+        btnReserveRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReserveRSActionPerformed(evt);
+            }
+        });
+
+        jdcRS.setDateFormatString("MM- dd-yyyy");
+
+        cmbHR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21" }));
+
+        jLabel22.setText("Time:");
+
+        jLabel23.setText("Seats:");
+
+        javax.swing.GroupLayout pnlRSLayout = new javax.swing.GroupLayout(pnlRS);
+        pnlRS.setLayout(pnlRSLayout);
+        pnlRSLayout.setHorizontalGroup(
+            pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addGroup(pnlRSLayout.createSequentialGroup()
+                        .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRSRefresh)
+                            .addComponent(jLabel22))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jdcRS, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlRSLayout.createSequentialGroup()
+                                .addComponent(cmbHR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumSeatsRS)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReserveRS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRSBack)))
+                .addContainerGap())
+        );
+        pnlRSLayout.setVerticalGroup(
+            pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbHR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23)
+                    .addComponent(txtNumSeatsRS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlRSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRSBack)
+                        .addComponent(btnRSRefresh)
+                        .addComponent(btnReserveRS))
+                    .addComponent(jdcRS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlRS, "card12");
+
+        pnlRT.setMaximumSize(new java.awt.Dimension(500, 382));
+        pnlRT.setMinimumSize(new java.awt.Dimension(500, 382));
+        pnlRT.setPreferredSize(new java.awt.Dimension(500, 382));
+
+        btnRTBack.setText("Back");
+        btnRTBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRTBackActionPerformed(evt);
+            }
+        });
+
+        tblRT.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Table", "In Use", "Seats"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Boolean.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblRT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRTMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblRTMouseEntered(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tblRT);
+
+        btnRTRefresh.setText("Refresh");
+        btnRTRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRTRefreshActionPerformed(evt);
+            }
+        });
+
+        btnRTReserveTable.setText("Reserve Table");
+        btnRTReserveTable.setEnabled(false);
+        btnRTReserveTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRTReserveTableActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlRTLayout = new javax.swing.GroupLayout(pnlRT);
+        pnlRT.setLayout(pnlRTLayout);
+        pnlRTLayout.setHorizontalGroup(
+            pnlRTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRTLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRTLayout.createSequentialGroup()
+                        .addComponent(btnRTRefresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRTReserveTable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRTBack))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlRTLayout.setVerticalGroup(
+            pnlRTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRTLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlRTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRTBack)
+                    .addComponent(btnRTRefresh)
+                    .addComponent(btnRTReserveTable))
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlRT, "card11");
+
         jLabel18.setText("Name:");
 
         jLabel19.setText("Course:");
@@ -306,7 +635,7 @@ public class restoProgram extends javax.swing.JFrame {
                 .addGroup(pnlAdminAddMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlAdminAddMenuLayout.createSequentialGroup()
                         .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                         .addComponent(txtAAMName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlAdminAddMenuLayout.createSequentialGroup()
                         .addComponent(btnAAMAdd)
@@ -382,7 +711,7 @@ public class restoProgram extends javax.swing.JFrame {
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlLoginLayout.createSequentialGroup()
                         .addComponent(btnLoginLogin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 401, Short.MAX_VALUE)
                         .addComponent(btnLoginBack))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlLoginLayout.createSequentialGroup()
                         .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -500,7 +829,7 @@ public class restoProgram extends javax.swing.JFrame {
                         .addComponent(btnEVCSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEVCCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
                         .addComponent(btnEVCBack)))
                 .addContainerGap())
         );
@@ -602,7 +931,7 @@ public class restoProgram extends javax.swing.JFrame {
             .addGroup(pnlAdminMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlAdminMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminMenuLayout.createSequentialGroup()
                         .addComponent(btnAMAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -638,21 +967,32 @@ public class restoProgram extends javax.swing.JFrame {
             }
         });
 
+        btnRLAM.setText("Reserve List");
+        btnRLAM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRLAMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlAdminMainHomeLayout = new javax.swing.GroupLayout(pnlAdminMainHome);
         pnlAdminMainHome.setLayout(pnlAdminMainHomeLayout);
         pnlAdminMainHomeLayout.setHorizontalGroup(
             pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAdminMainHomeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAdminHomeViewMenu)
-                .addContainerGap(402, Short.MAX_VALUE))
+                .addGroup(pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdminHomeViewMenu)
+                    .addComponent(btnRLAM))
+                .addContainerGap(427, Short.MAX_VALUE))
         );
         pnlAdminMainHomeLayout.setVerticalGroup(
             pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAdminMainHomeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAdminHomeViewMenu)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRLAM)
+                .addContainerGap(291, Short.MAX_VALUE))
         );
 
         pnlAdminMainTab.addTab("Home", pnlAdminMainHome);
@@ -688,7 +1028,7 @@ public class restoProgram extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
                         .addGroup(pnlAdminMainInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtAdminInfoFname, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(txtAdminInfoMname)
@@ -778,7 +1118,7 @@ public class restoProgram extends javax.swing.JFrame {
             .addGroup(pnlAdminMainAccountsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlAdminMainAccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                     .addGroup(pnlAdminMainAccountsLayout.createSequentialGroup()
                         .addComponent(btnAdminAccountsView)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -815,7 +1155,7 @@ public class restoProgram extends javax.swing.JFrame {
         pnlInfoLayout.setHorizontalGroup(
             pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoLayout.createSequentialGroup()
-                .addContainerGap(435, Short.MAX_VALUE)
+                .addContainerGap(468, Short.MAX_VALUE)
                 .addComponent(btnStartupBack)
                 .addContainerGap())
         );
@@ -838,10 +1178,10 @@ public class restoProgram extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Reserve Table");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCMReserveTable.setText("Reserve Table");
+        btnCMReserveTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCMReserveTableActionPerformed(evt);
             }
         });
 
@@ -853,8 +1193,8 @@ public class restoProgram extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCMViewMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(384, Short.MAX_VALUE))
+                    .addComponent(btnCMReserveTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(417, Short.MAX_VALUE))
         );
         pnlCusMainHomeLayout.setVerticalGroup(
             pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -862,7 +1202,7 @@ public class restoProgram extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnCMViewMenu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnCMReserveTable)
                 .addContainerGap(291, Short.MAX_VALUE))
         );
 
@@ -953,7 +1293,7 @@ public class restoProgram extends javax.swing.JFrame {
                         .addComponent(txtCusInfoPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCusInfoLayout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                         .addComponent(txtCusInfoFname, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCusInfoLayout.createSequentialGroup()
                         .addGroup(pnlCusInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1055,11 +1395,15 @@ public class restoProgram extends javax.swing.JFrame {
         String password = String.valueOf(txtLoginPassword.getPassword());
         if(checkFields("pnlLogin")){
             try{
+//                String sql = "Select * from admin where "
+//                + "adminUsernax`me='" + username + "' and "
+//                + "adminPassword='" + password + "'";
                 String sql = "Select * from admin where "
-                + "adminUsername='" + username + "' and "
-                + "adminPassword='" + password + "'";
+                        + "adminUsername = ? and adminPassword = ?";
                 SQLStatement = con.prepareStatement(sql);
-                queryResultSet = SQLStatement.executeQuery(sql);
+                SQLStatement.setString(1, username);
+                SQLStatement.setString(2, password);
+                queryResultSet = SQLStatement.executeQuery();
                 if(queryResultSet.next()){
                     String fName = queryResultSet.getString("adminFname");
                     String mName = queryResultSet.getString("adminMname");
@@ -1068,15 +1412,19 @@ public class restoProgram extends javax.swing.JFrame {
                             "adminID"));
                     currAdmin =  new Admin(id, fName, mName, lName, username,
                             password);
-                    this.say("Welcom Admin " + fName + "!");
+                    this.say("Welcome Admin " + fName + "!");
                     this.loginHistory("admin");
                     this.switchPanel("pnlAdminMain");
                 }else{
+//                    String sqlA = "Select * from customer where "
+//                    + "cusUsername='" + username + "' and '"
+//                    + "cusPassword='" + password + "'";
                     String sqlA = "Select * from customer where "
-                    + "cusUsername='" + username + "' and '"
-                    + "cusPassword='" + password + "'";
+                            + "cusUsername = ? and cusPassword = ?";
                     SQLStatement = con.prepareStatement(sqlA);
-                    queryResultSet = SQLStatement.executeQuery(sqlA);
+                    SQLStatement.setString(1, username);
+                    SQLStatement.setString(2, password);
+                    queryResultSet = SQLStatement.executeQuery();
                     if(queryResultSet.next()){
                         String fName = queryResultSet.getString("cusFname");
                         String mName = queryResultSet.getString("cusMname");
@@ -1086,7 +1434,7 @@ public class restoProgram extends javax.swing.JFrame {
                                 "cusID"));
                         currCustomer =  new Customer(id, fName, mName, lName,
                                 username, password, sex);
-                        this.say("Welcom Customer " + fName + "!");
+                        this.say("Welcome Customer " + fName + "!");
                         this.loginHistory("customer");
                         this.switchPanel("pnlCusMain");
                     }else{
@@ -1129,7 +1477,7 @@ public class restoProgram extends javax.swing.JFrame {
                     String sql1 = "Select from Customer where cusUsername='"
                             + txtCusInfoUsername.getText() + "'";
                     SQLStatement = con.prepareStatement(sql1);
-                    queryResultSet = SQLStatement.executeQuery(sql1);
+                    queryResultSet = SQLStatement.executeQuery();
                     if(queryResultSet.next()){
                         this.say("Username has already been taken! Please try a"
                                 + "different username");
@@ -1217,7 +1565,7 @@ public class restoProgram extends javax.swing.JFrame {
         try{
             String sql = "Select * from customer where cusID='" + selID + "'";
             SQLStatement = con.prepareStatement(sql);
-            queryResultSet = SQLStatement.executeQuery(sql);
+            queryResultSet = SQLStatement.executeQuery();
             if(queryResultSet.next()){
                 String eCUsername = queryResultSet.getString("cusUsername");
                 String eCPassword = queryResultSet.getString("cusPassowrd");
@@ -1327,7 +1675,7 @@ public class restoProgram extends javax.swing.JFrame {
                 String sql1 = "Select * from menu where menuName='" +
                         name + "'";
                 SQLStatement = con.prepareStatement(sql1);
-                queryResultSet = SQLStatement.executeQuery(sql1);
+                queryResultSet = SQLStatement.executeQuery();
                 if(!queryResultSet.next()){
                     try{
                         String sql2 = "Insert into menu "
@@ -1386,11 +1734,221 @@ public class restoProgram extends javax.swing.JFrame {
         this.viewTable("tblCVM");
     }//GEN-LAST:event_btnCVMRActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCMReserveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCMReserveTableActionPerformed
         // TODO add your handling code here:
-        //do something
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        this.switchPanel("pnlRT");
+    }//GEN-LAST:event_btnCMReserveTableActionPerformed
+
+    private void btnRTRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTRefreshActionPerformed
+        // TODO add your handling code here:
+        this.viewTable("tblRT");
+    }//GEN-LAST:event_btnRTRefreshActionPerformed
+
+    private void btnRTBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTBackActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlCusMain");
+    }//GEN-LAST:event_btnRTBackActionPerformed
+
+    private void tblRTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRTMouseClicked
+        // TODO add your handling code here:
+        btnRTReserveTable.setEnabled(true);
+//        btnRTReserveTable.setEnabled(false);
+    }//GEN-LAST:event_tblRTMouseClicked
+
+    private void btnRTReserveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTReserveTableActionPerformed
+        // TODO add your handling code here:
+        int selRow = tblRT.getSelectedRow();
+        int selID = Integer.parseInt(tblRT.getValueAt(selRow, 0).toString());
+        boolean SelBool = (Boolean) tblRT.getValueAt(selRow, 1);
+        if(SelBool){
+            this.say("Selected table is in use!\n"
+                    + "Please try another one");
+        }else{
+            connect();
+            try{
+                String sql = "Select * from tables where tblID='"
+                        + selID + "'";
+                SQLStatement = con.prepareStatement(sql);
+                queryResultSet = SQLStatement.executeQuery();
+                if(queryResultSet.next()){
+                    int seats = queryResultSet.getInt("tblSeats");
+                    selTable = new Tables(selID, false, seats);
+                    this.switchPanel("pnlRS");
+                }
+            }catch(SQLException | HeadlessException e){
+                this.say("Error:\n" + e);
+            }
+        }
+    }//GEN-LAST:event_btnRTReserveTableActionPerformed
+
+    private void btnRSRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSRefreshActionPerformed
+        // TODO add your handling code here:
+        this.viewTable("tblRS");
+    }//GEN-LAST:event_btnRSRefreshActionPerformed
+
+    private void btnReserveRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReserveRSActionPerformed
+        // TODO add your handling code here:
+        connect();
+//        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+//        String date = sdf.format(jdcRS.getDate());
+        Date date = new java.sql.Date(jdcRS.getDate().getTime());
+        int startTime = Integer.parseInt(cmbHR.getSelectedItem().toString());
+        int numSeats = Integer.parseInt(txtNumSeatsRS.getText());
+//        this.say(Integer.toString(numSeats));
+//        this.say(Integer.toString(selTable.getSeats()));
+        try{
+            if(numSeats <= selTable.getSeats()){
+                try{
+                    String sql = "Select * from reserveList where tblID=? and "
+                            + "startTime=? and rslDate=?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, selTable.getID());
+                    SQLStatement.setInt(2, startTime);
+                    SQLStatement.setDate(3, date);
+                    queryResultSet = SQLStatement.executeQuery();
+                    if(!queryResultSet.next()){
+//                        sql = "Insert into reservelist(?, ?, ?, ?, ?, ?, ?) "
+//                                + "values(?, ?, ?, ?, ?, ?, ?)";
+                        sql = "Insert into reservelist("
+                                + "tblID, "
+                                + "cusID, "
+                                + "cusFname, "
+                                + "startTime, "
+                                + "endTime, "
+                                + "rslDate, "
+                                + "resSeats) "
+                                + "values(?, ?, ?, ?, ? ,? ,?)";
+                        SQLStatement = con.prepareStatement(sql);
+//                        SQLStatement.setString(1, "tblID");
+//                        SQLStatement.setString(2, "cusID");
+//                        SQLStatement.setString(3, "cusFname");
+//                        SQLStatement.setString(4, "startTime");
+//                        SQLStatement.setString(5, "endTime");
+//                        SQLStatement.setString(6, "rslDate");
+//                        SQLStatement.setString(7, "resSeats");
+                        SQLStatement.setInt(1, selTable.getID());
+                        SQLStatement.setInt(2, currCustomer.getID());
+                        SQLStatement.setString(3, currCustomer.getFname());
+                        SQLStatement.setInt(4, startTime);
+                        SQLStatement.setInt(5, startTime + 1);
+                        SQLStatement.setDate(6, date);
+                        SQLStatement.setInt(7, numSeats);
+                        SQLStatement.executeUpdate();
+                        this.say("Reserve successful!");
+                        txtNumSeatsRS.setText(null);
+                        this.viewTable("tblRS");
+                    }else{
+                        this.say("Table reserved in that date & time");
+                    }
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+            }else{
+                this.say("Not enough available seats");
+            }
+        }catch(NullPointerException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnReserveRSActionPerformed
+
+    private void tblRTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRTMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblRTMouseEntered
+
+    private void btnRSBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSBackActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlRT");
+    }//GEN-LAST:event_btnRSBackActionPerformed
+
+    private void btnARSRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnARSRefreshActionPerformed
+        // TODO add your handling code here:
+        this.viewTable("tblARS");
+    }//GEN-LAST:event_btnARSRefreshActionPerformed
+
+    private void tblARSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblARSMouseClicked
+        // TODO add your handling code here:
+        btnARSBook.setEnabled(true);
+        btnARSCancel.setEnabled(true);
+    }//GEN-LAST:event_tblARSMouseClicked
+
+    private void btnARSCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnARSCancelActionPerformed
+        // TODO add your handling code here:
+        int selID = (int) tblARS.getValueAt(0, tblARS.getSelectedRow());
+        this.connect();
+        try{
+            String sql = "Delete from reservelist where rslistID=?";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.setInt(1, selID);
+            SQLStatement.executeUpdate();
+            this.say("Reservation cancelled");
+            btnARSBook.setEnabled(false);
+            btnARSCancel.setEnabled(false);
+            this.viewTable("tblARS");
+        }catch(SQLException | HeadlessException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnARSCancelActionPerformed
+
+    private void btnRLAMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRLAMActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlARS");
+    }//GEN-LAST:event_btnRLAMActionPerformed
+
+    private void btnARSBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnARSBookActionPerformed
+        // TODO add your handling code here:
+        int selID = (int) tblARS.getValueAt(0, tblARS.getSelectedRow());
+        this.connect();
+        Calendar cal = Calendar.getInstance();
+        Date currDate = new java.sql.Date(cal.getTimeInMillis());
+        try{
+            String sql = "Select * from reservelist where rslistID=?";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.setInt(1, selID);
+            queryResultSet = SQLStatement.executeQuery();
+            if(queryResultSet.next()){
+                int rslistID = selID;
+                int adminID = currAdmin.getID();
+                int tblID = queryResultSet.getInt("tblID");
+                int cusID = queryResultSet.getInt("cusID");
+                String cName = queryResultSet.getString("cusFname");
+                int sTime = queryResultSet.getInt("startTime");
+                int eTime = queryResultSet.getInt("endTime");
+                Date rslDate = queryResultSet.getDate("rslDate");
+                int rSeats = queryResultSet.getInt("resSeats");
+                if(rslDate == currDate){
+                    sql = "Delete from reservelist where rslistID=?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, selID);
+                    SQLStatement.executeUpdate();
+                    sql = "Insert into booklist("
+                            + "rslistID, "
+                            + "adminID, "
+                            + "tblID, "
+                            + "cusID, "
+                            + "cusFname, "
+                            + "startTime, "
+                            + "endTime, "
+                            + "rslDate, "
+                            + "resSeats) "
+                            + "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, rslistID);
+                    SQLStatement.setInt(2, adminID);
+                    SQLStatement.setInt(3, tblID);
+                    SQLStatement.setInt(4, cusID);
+                    SQLStatement.setString(5, cName);
+                    SQLStatement.setInt(6, sTime);
+                    SQLStatement.setInt(7, eTime);
+                    SQLStatement.setDate(8, rslDate);
+                    SQLStatement.setInt(9, rSeats);
+                    SQLStatement.executeUpdate();
+                    this.say("Reservation booked");
+                }
+            }
+        }catch(SQLException | HeadlessException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnARSBookActionPerformed
     
     private void connect(){
         try{
@@ -1436,6 +1994,15 @@ public class restoProgram extends javax.swing.JFrame {
                 break;
             case "pnlCVM":
                 mainPanel.add(pnlCVM);
+                break;
+            case "pnlRT":
+                mainPanel.add(pnlRT);
+                break;
+            case "pnlRS":
+                mainPanel.add(pnlRS);
+                break;
+            case "pnlARS":
+                mainPanel.add(pnlARS);
                 break;
             default:
                 break;
@@ -1616,7 +2183,7 @@ public class restoProgram extends javax.swing.JFrame {
                     String sql = "Select cusID, cusFname "
                             + "from customer";
                     SQLStatement = con.prepareStatement(sql);
-                    queryResultSet = SQLStatement.executeQuery(sql);
+                    queryResultSet = SQLStatement.executeQuery();
                     tblAdminAccountsCustomer.setModel(DbUtils.resultSetToTableModel(queryResultSet));
                 }catch(SQLException | HeadlessException e){
                     this.say("Error:\n" + e);
@@ -1626,7 +2193,7 @@ public class restoProgram extends javax.swing.JFrame {
                 try{
                     String sql = "Select * from menu";
                     SQLStatement = con.prepareStatement(sql);
-                    queryResultSet = SQLStatement.executeQuery(sql);
+                    queryResultSet = SQLStatement.executeQuery();
                     tblAMenu.setModel(DbUtils.resultSetToTableModel(queryResultSet));
                 }catch(SQLException | HeadlessException e){
                     this.say("Error:\n" + e);
@@ -1636,10 +2203,46 @@ public class restoProgram extends javax.swing.JFrame {
                 try{
                     String sql = "Select * from menu";
                     SQLStatement = con.prepareStatement(sql);
-                    queryResultSet = SQLStatement.executeQuery(sql);
+                    queryResultSet = SQLStatement.executeQuery();
                     tblCVM.setModel(DbUtils.resultSetToTableModel(queryResultSet));
                 }
                 catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
+            case "tblRT":
+                try{
+                    String sql = "Select * from tables";
+                    SQLStatement = con.prepareStatement(sql);
+                    queryResultSet = SQLStatement.executeQuery();
+                    tblRT.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }
+                catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
+            case "tblRS":
+                try{
+                    String sql = "Select startTime, endTime, rslDate from reserveList where tblID=?";
+                    SQLStatement = con.prepareStatement(sql);
+//                    SQLStatement.setString(1, "startTime");
+//                    SQLStatement.setString(2, "endTime");
+//                    SQLStatement.setString(3, "rslDate");
+                    SQLStatement.setInt(1, selTable.getID());
+                    queryResultSet = SQLStatement.executeQuery();
+                    tblRS.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }
+                catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
+            case "tblARS":
+                try{
+                    String sql = "Select * from reservelist";
+                    SQLStatement = con.prepareStatement(sql);
+                    queryResultSet = SQLStatement.executeQuery();
+                    tblARS.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }catch(SQLException | HeadlessException e){
                     this.say("Error:\n" + e);
                 }
                 break;
@@ -1692,10 +2295,15 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnAMBack;
     private javax.swing.JButton btnAMEdit;
     private javax.swing.JButton btnAMRefresh;
+    private javax.swing.JButton btnARSBack;
+    private javax.swing.JButton btnARSBook;
+    private javax.swing.JButton btnARSCancel;
+    private javax.swing.JButton btnARSRefresh;
     private javax.swing.JButton btnAdminAccountsRefresh;
     private javax.swing.JButton btnAdminAccountsView;
     private javax.swing.JButton btnAdminHomeViewMenu;
     private javax.swing.JButton btnAdminInfoRefresh;
+    private javax.swing.JButton btnCMReserveTable;
     private javax.swing.JButton btnCMViewMenu;
     private javax.swing.JButton btnCVMB;
     private javax.swing.JButton btnCVMR;
@@ -1709,11 +2317,18 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnEVCSave;
     private javax.swing.JButton btnLoginBack;
     private javax.swing.JButton btnLoginLogin;
+    private javax.swing.JButton btnRLAM;
+    private javax.swing.JButton btnRSBack;
+    private javax.swing.JButton btnRSRefresh;
+    private javax.swing.JButton btnRTBack;
+    private javax.swing.JButton btnRTRefresh;
+    private javax.swing.JButton btnRTReserveTable;
+    private javax.swing.JButton btnReserveRS;
     private javax.swing.JButton btnStartupBack;
     private javax.swing.JButton btnStartupExit;
     private javax.swing.JButton btnStartupInfo;
     private javax.swing.JButton btnStartupLaunch;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cmbHR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1728,6 +2343,8 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1738,9 +2355,14 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private com.toedter.calendar.JDateChooser jdcRS;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel pnlARS;
     private javax.swing.JPanel pnlAdminAddMenu;
     private javax.swing.JPanel pnlAdminMain;
     private javax.swing.JPanel pnlAdminMainAccounts;
@@ -1756,10 +2378,15 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEditViewCustomer;
     private javax.swing.JPanel pnlInfo;
     private javax.swing.JPanel pnlLogin;
+    private javax.swing.JPanel pnlRS;
+    private javax.swing.JPanel pnlRT;
     private javax.swing.JPanel pnlStartup;
     private javax.swing.JTable tblAMenu;
+    private javax.swing.JTable tblARS;
     private javax.swing.JTable tblAdminAccountsCustomer;
     private javax.swing.JTable tblCVM;
+    private javax.swing.JTable tblRS;
+    private javax.swing.JTable tblRT;
     private javax.swing.JTextField txtAAMCourse;
     private javax.swing.JTextField txtAAMName;
     private javax.swing.JTextField txtAAMPrice;
@@ -1783,5 +2410,6 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JTextField txtEVCUsername;
     private javax.swing.JPasswordField txtLoginPassword;
     private javax.swing.JTextField txtLoginUsername;
+    private javax.swing.JTextField txtNumSeatsRS;
     // End of variables declaration//GEN-END:variables
 }
