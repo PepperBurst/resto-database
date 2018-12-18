@@ -29,6 +29,7 @@ public class restoProgram extends javax.swing.JFrame {
     Admin currAdmin;
     Customer currCustomer, editCustomer;
     Tables selTable;
+    Item selItem;
     /**
      * Creates new form restoProgram
      */
@@ -37,6 +38,7 @@ public class restoProgram extends javax.swing.JFrame {
         this.currCustomer = new Customer();
         this.editCustomer = new Customer();
         this.selTable = new Tables();
+        this.selItem = new Item();
         initComponents();
     }
 
@@ -54,6 +56,21 @@ public class restoProgram extends javax.swing.JFrame {
         btnStartupLaunch = new javax.swing.JButton();
         btnStartupInfo = new javax.swing.JButton();
         btnStartupExit = new javax.swing.JButton();
+        pnlCOS = new javax.swing.JPanel();
+        btnCOSBack = new javax.swing.JButton();
+        cmbMenu = new javax.swing.JComboBox<>();
+        cmbCourse = new javax.swing.JComboBox<>();
+        txtQty = new javax.swing.JTextField();
+        btnCOSAdd = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tblOF = new javax.swing.JTable();
+        btnCOSRefresh = new javax.swing.JButton();
+        lblPrice = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        btnCOSCOrder = new javax.swing.JButton();
         pnlARS = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblARS = new javax.swing.JTable();
@@ -153,6 +170,7 @@ public class restoProgram extends javax.swing.JFrame {
         pnlCusMainHome = new javax.swing.JPanel();
         btnCMViewMenu = new javax.swing.JButton();
         btnCMReserveTable = new javax.swing.JButton();
+        btnCMOrder = new javax.swing.JButton();
         pnlCusInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -227,6 +245,168 @@ public class restoProgram extends javax.swing.JFrame {
 
         mainPanel.add(pnlStartup, "card2");
 
+        pnlCOS.setMinimumSize(new java.awt.Dimension(500, 382));
+
+        btnCOSBack.setText("Back");
+        btnCOSBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCOSBackActionPerformed(evt);
+            }
+        });
+
+        cmbMenu.setEnabled(false);
+        cmbMenu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbMenuItemStateChanged(evt);
+            }
+        });
+
+        cmbCourse.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbCourseItemStateChanged(evt);
+            }
+        });
+
+        txtQty.setEditable(false);
+        txtQty.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtQtyMouseClicked(evt);
+            }
+        });
+        txtQty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtQtyKeyPressed(evt);
+            }
+        });
+
+        btnCOSAdd.setText("Add");
+        btnCOSAdd.setEnabled(false);
+        btnCOSAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCOSAddActionPerformed(evt);
+            }
+        });
+
+        tblOF.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Item", "Course", "Qty", "Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblOF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOFMouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(tblOF);
+
+        btnCOSRefresh.setText("Refresh");
+        btnCOSRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCOSRefreshActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setText("Course");
+
+        jLabel25.setText("Item");
+
+        jLabel26.setText("Price");
+
+        jLabel27.setText("Qty");
+
+        btnCOSCOrder.setText("Complete Order");
+        btnCOSCOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCOSCOrderActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlCOSLayout = new javax.swing.GroupLayout(pnlCOS);
+        pnlCOS.setLayout(pnlCOSLayout);
+        pnlCOSLayout.setHorizontalGroup(
+            pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCOSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCOSLayout.createSequentialGroup()
+                        .addComponent(btnCOSRefresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCOSCOrder)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCOSBack))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addGroup(pnlCOSLayout.createSequentialGroup()
+                        .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCOSAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pnlCOSLayout.setVerticalGroup(
+            pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCOSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlCOSLayout.createSequentialGroup()
+                        .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel26)
+                            .addComponent(jLabel27))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnCOSAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCOSBack)
+                    .addComponent(btnCOSRefresh)
+                    .addComponent(btnCOSCOrder))
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlCOS, "card14");
+
         pnlARS.setMaximumSize(new java.awt.Dimension(500, 382));
         pnlARS.setMinimumSize(new java.awt.Dimension(500, 382));
         pnlARS.setPreferredSize(new java.awt.Dimension(500, 382));
@@ -263,6 +443,15 @@ public class restoProgram extends javax.swing.JFrame {
             }
         });
         jScrollPane6.setViewportView(tblARS);
+        if (tblARS.getColumnModel().getColumnCount() > 0) {
+            tblARS.getColumnModel().getColumn(1).setHeaderValue("Table");
+            tblARS.getColumnModel().getColumn(2).setHeaderValue("Customer ID");
+            tblARS.getColumnModel().getColumn(3).setHeaderValue("Customer Name");
+            tblARS.getColumnModel().getColumn(4).setHeaderValue("Start");
+            tblARS.getColumnModel().getColumn(5).setHeaderValue("End");
+            tblARS.getColumnModel().getColumn(6).setHeaderValue("Date");
+            tblARS.getColumnModel().getColumn(7).setHeaderValue("Seats");
+        }
 
         btnARSBack.setText("Back");
 
@@ -1185,15 +1374,24 @@ public class restoProgram extends javax.swing.JFrame {
             }
         });
 
+        btnCMOrder.setText("Order");
+        btnCMOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCMOrderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCusMainHomeLayout = new javax.swing.GroupLayout(pnlCusMainHome);
         pnlCusMainHome.setLayout(pnlCusMainHomeLayout);
         pnlCusMainHomeLayout.setHorizontalGroup(
             pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCusMainHomeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCMViewMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCMReserveTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnCMViewMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCMReserveTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCMOrder))
                 .addContainerGap(417, Short.MAX_VALUE))
         );
         pnlCusMainHomeLayout.setVerticalGroup(
@@ -1203,7 +1401,9 @@ public class restoProgram extends javax.swing.JFrame {
                 .addComponent(btnCMViewMenu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCMReserveTable)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCMOrder)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         pnlCusMainTab.addTab("Home", pnlCusMainHome);
@@ -1800,11 +2000,12 @@ public class restoProgram extends javax.swing.JFrame {
             if(numSeats <= selTable.getSeats()){
                 try{
                     String sql = "Select * from reserveList where tblID=? and "
-                            + "startTime=? and rslDate=?";
+                            + "startTime=? and rslDate=? and cusID=?";
                     SQLStatement = con.prepareStatement(sql);
                     SQLStatement.setInt(1, selTable.getID());
                     SQLStatement.setInt(2, startTime);
                     SQLStatement.setDate(3, date);
+                    SQLStatement.setInt(4, currCustomer.getID());
                     queryResultSet = SQLStatement.executeQuery();
                     if(!queryResultSet.next()){
 //                        sql = "Insert into reservelist(?, ?, ?, ?, ?, ?, ?) "
@@ -1949,6 +2150,105 @@ public class restoProgram extends javax.swing.JFrame {
             this.say("Error:\n" + e);
         }
     }//GEN-LAST:event_btnARSBookActionPerformed
+
+    private void btnCMOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCMOrderActionPerformed
+        // TODO add your handling code here:
+        this.connect();
+        try{
+            String sql = "Select * from booklist where cusID=?";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.setInt(1, currCustomer.getID());
+            queryResultSet = SQLStatement.executeQuery();
+            if(queryResultSet.next()){
+                this.switchPanel("pnlCOS");
+            }else{
+                this.say("You aren't currently booked");
+            }
+        }catch(SQLException | HeadlessException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnCMOrderActionPerformed
+
+    private void btnCOSBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCOSBackActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlCusMain");
+    }//GEN-LAST:event_btnCOSBackActionPerformed
+
+    private void tblOFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOFMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblOFMouseClicked
+
+    private void btnCOSRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCOSRefreshActionPerformed
+        // TODO add your handling code here:
+        this.connect();
+        this.viewTable("tblOF");
+        this.showValues("pnlCOS");
+    }//GEN-LAST:event_btnCOSRefreshActionPerformed
+
+    private void cmbCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCourseItemStateChanged
+        // TODO add your handling code here:
+        this.connect();
+        this.showValues("pnlCOS-M");
+        cmbMenu.setEnabled(true);
+    }//GEN-LAST:event_cmbCourseItemStateChanged
+
+    private void cmbMenuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMenuItemStateChanged
+        // TODO add your handling code here:
+//        Item selItem = new Item()
+        this.connect();
+        this.showValues("pnlCOS-P");
+        txtQty.setEditable(true);
+    }//GEN-LAST:event_cmbMenuItemStateChanged
+
+    private void txtQtyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtyKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQtyKeyPressed
+
+    private void txtQtyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQtyMouseClicked
+        // TODO add your handling code here:
+        btnCOSAdd.setEnabled(true);
+    }//GEN-LAST:event_txtQtyMouseClicked
+
+    private void btnCOSAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCOSAddActionPerformed
+        // TODO add your handling code here:
+        this.connect();
+        try{
+            int qty = Integer.parseInt(txtQty.getText());
+//            String sql = "Select "
+            if(qty <= selItem.getStock()){
+                String sql = "Insert into orderform("
+                        + "cusID, "
+                        + "cusFname, "
+                        + "menuID, "
+                        + "menuCourse, "
+                        + "menuName, "
+                        + "menuAmont, "
+                        + "totalPrice) "
+                        + "values(?, ?, ?, ? ,? ,?, ?)";
+                SQLStatement = con.prepareStatement(sql);
+                SQLStatement.setInt(1, currCustomer.getID());
+                SQLStatement.setString(2, currCustomer.getFname());
+                SQLStatement.setInt(3, selItem.getID());
+                SQLStatement.setString(4, selItem.getCourse());
+                SQLStatement.setString(5, selItem.getName());
+                SQLStatement.setInt(6, qty);
+                SQLStatement.setInt(7, qty * selItem.getPrice());
+                SQLStatement.executeUpdate();
+                this.say("Item added!");
+                cmbMenu.setEnabled(false);
+                txtQty.setEditable(false);
+                btnCOSAdd.setEnabled(false);
+                this.viewTable("tblOF");
+            }
+        }catch(NullPointerException | SQLException | HeadlessException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnCOSAddActionPerformed
+
+    private void btnCOSCOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCOSCOrderActionPerformed
+        // TODO add your handling code here:
+        this.connect();
+    }//GEN-LAST:event_btnCOSCOrderActionPerformed
     
     private void connect(){
         try{
@@ -2003,6 +2303,9 @@ public class restoProgram extends javax.swing.JFrame {
                 break;
             case "pnlARS":
                 mainPanel.add(pnlARS);
+                break;
+            case "pnlCOS":
+                mainPanel.add(pnlCOS);
                 break;
             default:
                 break;
@@ -2089,6 +2392,55 @@ public class restoProgram extends javax.swing.JFrame {
                 txtEVCFname.setText(editCustomer.getFname());
                 txtEVCMname.setText(editCustomer.getMname());
                 txtEVCLname.setText(editCustomer.getLname());
+                break;
+            case "pnlCOS":
+                try{
+                    String sql = "Select * from menu";
+                    SQLStatement = con.prepareStatement(sql);
+                    queryResultSet = SQLStatement.executeQuery();
+                    while(queryResultSet.next()){
+                        cmbCourse.addItem(queryResultSet.getString("menuCourse"));
+                    }
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
+            case "pnlCOS-M":
+                try{
+                    String sql = "Select * from menu where menuCourse=?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setString(1, cmbCourse.getSelectedItem().toString());
+                    queryResultSet = SQLStatement.executeQuery();
+                    while(queryResultSet.next()){
+                        cmbMenu.addItem(queryResultSet.getString("menuName"));
+                    }
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
+            case "pnlCOS-P":
+                try{
+                    String sql = "Select * from menu where menuName=?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setString(1, cmbMenu.getSelectedItem().toString());
+                    queryResultSet = SQLStatement.executeQuery();
+                    if(queryResultSet.next()){
+                        int mnID = queryResultSet.getInt("menuID");
+                        String mnName = queryResultSet.getString("menuName");
+                        String mnCourse = queryResultSet.getString("menuCourse");
+                        int mnPrice = queryResultSet.getInt("menuPrice");
+                        int mnStock = queryResultSet.getInt("menuStock");
+                        selItem = new Item(
+                                mnID, 
+                                mnName, 
+                                mnCourse, 
+                                mnPrice,
+                                mnStock);
+                        lblPrice.setText(selItem.getPriceS());
+                    }
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
                 break;
             default:
                 break;
@@ -2246,6 +2598,16 @@ public class restoProgram extends javax.swing.JFrame {
                     this.say("Error:\n" + e);
                 }
                 break;
+            case "tblOF":
+                try{
+                    String sql = "Select menuName, menuCourse, menuAmount, totalPrice from orderform";
+                    SQLStatement = con.prepareStatement(sql);
+                    queryResultSet = SQLStatement.executeQuery();
+                    tblOF.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
             default:
                 break;
         }
@@ -2303,8 +2665,13 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnAdminAccountsView;
     private javax.swing.JButton btnAdminHomeViewMenu;
     private javax.swing.JButton btnAdminInfoRefresh;
+    private javax.swing.JButton btnCMOrder;
     private javax.swing.JButton btnCMReserveTable;
     private javax.swing.JButton btnCMViewMenu;
+    private javax.swing.JButton btnCOSAdd;
+    private javax.swing.JButton btnCOSBack;
+    private javax.swing.JButton btnCOSCOrder;
+    private javax.swing.JButton btnCOSRefresh;
     private javax.swing.JButton btnCVMB;
     private javax.swing.JButton btnCVMR;
     private javax.swing.JButton btnCusInfoCancel;
@@ -2328,7 +2695,9 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnStartupExit;
     private javax.swing.JButton btnStartupInfo;
     private javax.swing.JButton btnStartupLaunch;
+    private javax.swing.JComboBox<String> cmbCourse;
     private javax.swing.JComboBox<String> cmbHR;
+    private javax.swing.JComboBox<String> cmbMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2345,6 +2714,10 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2358,9 +2731,11 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private com.toedter.calendar.JDateChooser jdcRS;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
+    private javax.swing.JLabel lblPrice;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel pnlARS;
     private javax.swing.JPanel pnlAdminAddMenu;
@@ -2370,6 +2745,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlAdminMainInfo;
     private javax.swing.JTabbedPane pnlAdminMainTab;
     private javax.swing.JPanel pnlAdminMenu;
+    private javax.swing.JPanel pnlCOS;
     private javax.swing.JPanel pnlCVM;
     private javax.swing.JPanel pnlCusInfo;
     private javax.swing.JPanel pnlCusMain;
@@ -2385,6 +2761,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JTable tblARS;
     private javax.swing.JTable tblAdminAccountsCustomer;
     private javax.swing.JTable tblCVM;
+    private javax.swing.JTable tblOF;
     private javax.swing.JTable tblRS;
     private javax.swing.JTable tblRT;
     private javax.swing.JTextField txtAAMCourse;
@@ -2411,5 +2788,6 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtLoginPassword;
     private javax.swing.JTextField txtLoginUsername;
     private javax.swing.JTextField txtNumSeatsRS;
+    private javax.swing.JTextField txtQty;
     // End of variables declaration//GEN-END:variables
 }
