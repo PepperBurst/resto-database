@@ -2559,7 +2559,7 @@ public class restoProgram extends javax.swing.JFrame {
                 SQLStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
                 SQLStatement.setInt(5, theT);
                 SQLStatement.executeUpdate();
-                sql = "Delete from orderbfr where cusID=? ";
+                sql = "Delete from orderbfr where cusID=?";
                 SQLStatement = con.prepareStatement(sql);
                 SQLStatement.setInt(1, (int) tblAVO.getValueAt(0, 1));
                 SQLStatement.executeUpdate();
@@ -2586,8 +2586,9 @@ public class restoProgram extends javax.swing.JFrame {
                         + "cusID, "
                         + "cusFname, "
                         + "ordStat, "
-                        + "ordDate) "
-                        + "values(?, ?, ?, ?)";
+                        + "ordDate, "
+                        + "tblID) "
+                        + "values(?, ?, ?, ?, ?)";
                 SQLStatement = con.prepareStatement(sql);
                 SQLStatement.setInt(1, (int) tblAVO.getValueAt(0, 1));
                 SQLStatement.setString(2, (String) tblAVO.getValueAt(0, 2));
@@ -2619,7 +2620,8 @@ public class restoProgram extends javax.swing.JFrame {
                     SQLStatement.setString(5, queryResultSet.getString("menuCourse"));
                     SQLStatement.setString(6, queryResultSet.getString("menuName"));
                     SQLStatement.setInt(7, queryResultSet.getInt("menuAmount"));
-                    SQLStatement.setInt(8, queryResultSet.getInt("menuPrice"));
+                    int ayy = queryResultSet.getInt("totalPrice") / queryResultSet.getInt("menuAmount");
+                    SQLStatement.setInt(8, ayy);
                     SQLStatement.setInt(9, queryResultSet.getInt("totalPrice"));
                     SQLStatement.setDate(10, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
                     this.say("Order Approved");
