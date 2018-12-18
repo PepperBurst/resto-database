@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2018 at 03:32 AM
+-- Generation Time: Dec 18, 2018 at 07:08 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -43,6 +43,25 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`adminID`, `adminUsername`, `adminPassword`, `adminFname`, `adminLname`, `adminMname`) VALUES
 (1, 'username', 'password', 'test1', 'test2', 'test3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookhistory`
+--
+
+CREATE TABLE `bookhistory` (
+  `blID` int(32) NOT NULL,
+  `rslistID` int(32) NOT NULL,
+  `adminID` int(32) NOT NULL,
+  `tblID` int(32) NOT NULL,
+  `cusID` int(32) NOT NULL,
+  `cusFname` varchar(32) NOT NULL,
+  `startTime` int(32) NOT NULL,
+  `endTime` int(32) NOT NULL,
+  `rslDate` date NOT NULL,
+  `resSeats` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -168,6 +187,38 @@ INSERT INTO `menu` (`menuID`, `menuName`, `menuCourse`, `menuPrice`, `menuStock`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orderbfr`
+--
+
+CREATE TABLE `orderbfr` (
+  `ofID` int(32) NOT NULL,
+  `cusID` int(32) NOT NULL,
+  `cusFname` varchar(32) NOT NULL,
+  `menuID` int(32) NOT NULL,
+  `menuCourse` varchar(32) NOT NULL,
+  `menuName` varchar(32) NOT NULL,
+  `menuAmount` int(32) NOT NULL,
+  `totalPrice` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderdump`
+--
+
+CREATE TABLE `orderdump` (
+  `ordumpID` int(32) NOT NULL,
+  `cusID` int(32) NOT NULL,
+  `cusFname` varchar(32) NOT NULL,
+  `ordStat` varchar(32) NOT NULL,
+  `ordDate` date NOT NULL,
+  `tblID` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orderform`
 --
 
@@ -180,6 +231,26 @@ CREATE TABLE `orderform` (
   `menuName` varchar(32) NOT NULL,
   `menuAmount` int(32) NOT NULL,
   `totalPrice` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderhistory`
+--
+
+CREATE TABLE `orderhistory` (
+  `ordID` int(32) NOT NULL,
+  `cusID` int(32) NOT NULL,
+  `cusFname` varchar(32) NOT NULL,
+  `adminID` int(32) NOT NULL,
+  `mnID` int(32) NOT NULL,
+  `mnCourse` varchar(32) NOT NULL,
+  `mnName` varchar(32) NOT NULL,
+  `mnAmount` int(32) NOT NULL,
+  `mnPrice` int(32) NOT NULL,
+  `ttlPrice` int(32) NOT NULL,
+  `ordDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -255,6 +326,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`adminID`);
 
 --
+-- Indexes for table `bookhistory`
+--
+ALTER TABLE `bookhistory`
+  ADD PRIMARY KEY (`blID`);
+
+--
 -- Indexes for table `booklist`
 --
 ALTER TABLE `booklist`
@@ -279,10 +356,28 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`menuID`);
 
 --
+-- Indexes for table `orderbfr`
+--
+ALTER TABLE `orderbfr`
+  ADD PRIMARY KEY (`ofID`);
+
+--
+-- Indexes for table `orderdump`
+--
+ALTER TABLE `orderdump`
+  ADD PRIMARY KEY (`ordumpID`);
+
+--
 -- Indexes for table `orderform`
 --
 ALTER TABLE `orderform`
   ADD PRIMARY KEY (`ofID`);
+
+--
+-- Indexes for table `orderhistory`
+--
+ALTER TABLE `orderhistory`
+  ADD PRIMARY KEY (`ordID`);
 
 --
 -- Indexes for table `reserveform`
@@ -313,6 +408,12 @@ ALTER TABLE `admin`
   MODIFY `adminID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `bookhistory`
+--
+ALTER TABLE `bookhistory`
+  MODIFY `blID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `booklist`
 --
 ALTER TABLE `booklist`
@@ -337,10 +438,28 @@ ALTER TABLE `menu`
   MODIFY `menuID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `orderbfr`
+--
+ALTER TABLE `orderbfr`
+  MODIFY `ofID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orderdump`
+--
+ALTER TABLE `orderdump`
+  MODIFY `ordumpID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `orderform`
 --
 ALTER TABLE `orderform`
   MODIFY `ofID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orderhistory`
+--
+ALTER TABLE `orderhistory`
+  MODIFY `ordID` int(32) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reserveform`
