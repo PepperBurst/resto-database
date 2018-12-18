@@ -288,7 +288,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnCOSBack" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane7" alignment="0" pref="480" max="32767" attributes="0"/>
+                          <Component id="jScrollPane7" alignment="0" pref="513" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cmbCourse" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
@@ -332,17 +332,15 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblPrice" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="cmbCourse" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cmbMenu" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="cmbMenu" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtQty" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbCourse" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="btnCOSAdd" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane7" pref="285" max="32767" attributes="0"/>
+                      <Component id="jScrollPane7" pref="283" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnCOSBack" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -365,6 +363,7 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbMenu">
               <Properties>
+                <Property name="maximumRowCount" type="int" value="20"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
@@ -379,12 +378,14 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbCourse">
               <Properties>
+                <Property name="maximumRowCount" type="int" value="20"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbCourseItemStateChanged"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmbCourseMouseClicked"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -527,7 +528,7 @@
                       <Component id="btnARSBook" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnARSCancel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="222" max="32767" attributes="0"/>
+                      <EmptySpace pref="214" max="32767" attributes="0"/>
                       <Component id="btnARSBack" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -642,6 +643,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Back"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnARSBackActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnARSRefresh">
               <Properties>
@@ -1679,6 +1683,7 @@
                                   <Component id="btnAdminHomeViewMenu" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnRLAM" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnAMViewOrders" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnAMLogout" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="427" max="32767" attributes="0"/>
                           </Group>
@@ -1693,7 +1698,9 @@
                               <Component id="btnRLAM" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnAMViewOrders" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="262" max="32767" attributes="0"/>
+                              <EmptySpace pref="228" max="32767" attributes="0"/>
+                              <Component id="btnAMLogout" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1723,6 +1730,14 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAMViewOrdersActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JButton" name="btnAMLogout">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Log out"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAMLogoutActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="pnlAdminMainInfo">
@@ -1748,7 +1763,7 @@
                                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="244" max="32767" attributes="0"/>
+                                      <EmptySpace pref="246" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txtAdminInfoFname" pref="200" max="32767" attributes="0"/>
                                           <Component id="txtAdminInfoMname" max="32767" attributes="0"/>
@@ -1794,7 +1809,7 @@
                                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtAdminInfoPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="151" max="32767" attributes="0"/>
+                              <EmptySpace pref="185" max="32767" attributes="0"/>
                               <Component id="btnAdminInfoRefresh" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1862,7 +1877,7 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" pref="508" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="510" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="btnAdminAccountsView" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -2029,6 +2044,7 @@
                                   <Component id="btnCMOrder" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnCMCOS" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnCMCO" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton2" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="391" max="32767" attributes="0"/>
                           </Group>
@@ -2047,7 +2063,9 @@
                               <Component id="btnCMCOS" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnCMCO" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="204" max="32767" attributes="0"/>
+                              <EmptySpace pref="170" max="32767" attributes="0"/>
+                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2093,6 +2111,14 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCMCOActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JButton" name="jButton2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="jButton2"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="pnlCusInfo">
@@ -2127,7 +2153,7 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="224" max="32767" attributes="0"/>
+                                      <EmptySpace pref="226" max="32767" attributes="0"/>
                                       <Component id="txtCusInfoFname" min="-2" pref="229" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
