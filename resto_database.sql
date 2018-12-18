@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2018 at 04:50 AM
+-- Generation Time: Dec 18, 2018 at 03:32 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -43,6 +43,25 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`adminID`, `adminUsername`, `adminPassword`, `adminFname`, `adminLname`, `adminMname`) VALUES
 (1, 'username', 'password', 'test1', 'test2', 'test3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booklist`
+--
+
+CREATE TABLE `booklist` (
+  `blID` int(32) NOT NULL,
+  `rslistID` int(32) NOT NULL,
+  `adminID` int(32) NOT NULL,
+  `tblID` int(32) NOT NULL,
+  `cusID` int(32) NOT NULL,
+  `cusFname` varchar(32) NOT NULL,
+  `startTime` int(32) NOT NULL,
+  `endTime` int(32) NOT NULL,
+  `rslDate` date NOT NULL,
+  `resSeats` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -94,7 +113,17 @@ INSERT INTO `loginhistory` (`loginHistID`, `loginHistType`, `loginHistAccountID`
 (6, 'admin', 1, 'test1', '2018-10-22'),
 (7, 'customer', 1, 'test1', '2018-11-17'),
 (8, 'customer', 1, 'test1', '2018-11-17'),
-(9, 'customer', 1, 'test1', '2018-11-17');
+(9, 'customer', 1, 'test1', '2018-11-17'),
+(10, 'customer', 1, 'test1', '2018-11-17'),
+(11, 'customer', 1, 'test1', '2018-11-17'),
+(12, 'customer', 1, 'test1', '2018-11-17'),
+(13, 'customer', 1, 'test1', '2018-11-17'),
+(14, 'customer', 1, 'test1', '2018-11-17'),
+(15, 'customer', 1, 'test1', '2018-11-17'),
+(16, 'customer', 1, 'test1', '2018-11-17'),
+(17, 'admin', 1, 'test1', '2018-11-17'),
+(18, 'admin', 1, 'test1', '2018-11-17'),
+(19, 'customer', 1, 'test1', '2018-11-18');
 
 -- --------------------------------------------------------
 
@@ -139,6 +168,23 @@ INSERT INTO `menu` (`menuID`, `menuName`, `menuCourse`, `menuPrice`, `menuStock`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orderform`
+--
+
+CREATE TABLE `orderform` (
+  `ofID` int(32) NOT NULL,
+  `cusID` int(32) NOT NULL,
+  `cusFname` varchar(32) NOT NULL,
+  `menuID` int(32) NOT NULL,
+  `menuCourse` varchar(32) NOT NULL,
+  `menuName` varchar(32) NOT NULL,
+  `menuAmount` int(32) NOT NULL,
+  `totalPrice` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reserveform`
 --
 
@@ -168,6 +214,13 @@ CREATE TABLE `reservelist` (
   `rslDate` date DEFAULT NULL,
   `resSeats` int(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reservelist`
+--
+
+INSERT INTO `reservelist` (`rslistID`, `tblID`, `cusID`, `cusFname`, `startTime`, `endTime`, `rslDate`, `resSeats`) VALUES
+(1, 4, 1, 'test1', 10, 11, '2018-12-18', 1);
 
 -- --------------------------------------------------------
 
@@ -202,6 +255,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`adminID`);
 
 --
+-- Indexes for table `booklist`
+--
+ALTER TABLE `booklist`
+  ADD PRIMARY KEY (`blID`);
+
+--
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -218,6 +277,12 @@ ALTER TABLE `loginhistory`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`menuID`);
+
+--
+-- Indexes for table `orderform`
+--
+ALTER TABLE `orderform`
+  ADD PRIMARY KEY (`ofID`);
 
 --
 -- Indexes for table `reserveform`
@@ -248,6 +313,12 @@ ALTER TABLE `admin`
   MODIFY `adminID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `booklist`
+--
+ALTER TABLE `booklist`
+  MODIFY `blID` int(32) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
@@ -257,13 +328,19 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `loginhistory`
 --
 ALTER TABLE `loginhistory`
-  MODIFY `loginHistID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `loginHistID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
   MODIFY `menuID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `orderform`
+--
+ALTER TABLE `orderform`
+  MODIFY `ofID` int(32) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reserveform`
@@ -275,7 +352,7 @@ ALTER TABLE `reserveform`
 -- AUTO_INCREMENT for table `reservelist`
 --
 ALTER TABLE `reservelist`
-  MODIFY `rslistID` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `rslistID` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tables`
