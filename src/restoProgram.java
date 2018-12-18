@@ -25,6 +25,7 @@ public class restoProgram extends javax.swing.JFrame {
 
     PreparedStatement SQLStatement = null;
     ResultSet queryResultSet = null;
+    ResultSet rs = null;
     Connection con = null;
     Admin currAdmin;
     Customer currCustomer, editCustomer;
@@ -56,6 +57,13 @@ public class restoProgram extends javax.swing.JFrame {
         btnStartupLaunch = new javax.swing.JButton();
         btnStartupInfo = new javax.swing.JButton();
         btnStartupExit = new javax.swing.JButton();
+        pnlAVO = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tblAVO = new javax.swing.JTable();
+        btnAVOBack = new javax.swing.JToggleButton();
+        btnAVOApprove = new javax.swing.JButton();
+        btnAVOCancel = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         pnlCOS = new javax.swing.JPanel();
         btnCOSBack = new javax.swing.JButton();
         cmbMenu = new javax.swing.JComboBox<>();
@@ -146,6 +154,7 @@ public class restoProgram extends javax.swing.JFrame {
         pnlAdminMainHome = new javax.swing.JPanel();
         btnAdminHomeViewMenu = new javax.swing.JButton();
         btnRLAM = new javax.swing.JButton();
+        btnAMViewOrders = new javax.swing.JButton();
         pnlAdminMainInfo = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -171,6 +180,8 @@ public class restoProgram extends javax.swing.JFrame {
         btnCMViewMenu = new javax.swing.JButton();
         btnCMReserveTable = new javax.swing.JButton();
         btnCMOrder = new javax.swing.JButton();
+        btnCMCOS = new javax.swing.JButton();
+        btnCMCO = new javax.swing.JButton();
         pnlCusInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -244,6 +255,103 @@ public class restoProgram extends javax.swing.JFrame {
         );
 
         mainPanel.add(pnlStartup, "card2");
+
+        pnlAVO.setMinimumSize(new java.awt.Dimension(500, 382));
+
+        tblAVO.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Order ID", "Customer ID", "Customer Name", "Menu ID", "Menu Course", "Menu Name", "MenuAmount", "Total Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblAVO.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAVOMouseClicked(evt);
+            }
+        });
+        jScrollPane8.setViewportView(tblAVO);
+
+        btnAVOBack.setText("Back");
+        btnAVOBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAVOBackActionPerformed(evt);
+            }
+        });
+
+        btnAVOApprove.setText("Approve Pending Order");
+        btnAVOApprove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAVOApproveActionPerformed(evt);
+            }
+        });
+
+        btnAVOCancel.setText("Cancel Pending Order");
+        btnAVOCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAVOCancelActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlAVOLayout = new javax.swing.GroupLayout(pnlAVO);
+        pnlAVO.setLayout(pnlAVOLayout);
+        pnlAVOLayout.setHorizontalGroup(
+            pnlAVOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAVOLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAVOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAVOLayout.createSequentialGroup()
+                        .addComponent(btnAVOApprove)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAVOCancel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAVOBack))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlAVOLayout.setVerticalGroup(
+            pnlAVOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAVOLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAVOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAVOBack)
+                    .addComponent(btnAVOApprove)
+                    .addComponent(btnAVOCancel)
+                    .addComponent(jButton1))
+                .addContainerGap())
+        );
+
+        mainPanel.add(pnlAVO, "card15");
 
         pnlCOS.setMinimumSize(new java.awt.Dimension(500, 382));
 
@@ -1163,6 +1271,13 @@ public class restoProgram extends javax.swing.JFrame {
             }
         });
 
+        btnAMViewOrders.setText("View Orders");
+        btnAMViewOrders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAMViewOrdersActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlAdminMainHomeLayout = new javax.swing.GroupLayout(pnlAdminMainHome);
         pnlAdminMainHome.setLayout(pnlAdminMainHomeLayout);
         pnlAdminMainHomeLayout.setHorizontalGroup(
@@ -1171,7 +1286,8 @@ public class restoProgram extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlAdminMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdminHomeViewMenu)
-                    .addComponent(btnRLAM))
+                    .addComponent(btnRLAM)
+                    .addComponent(btnAMViewOrders))
                 .addContainerGap(427, Short.MAX_VALUE))
         );
         pnlAdminMainHomeLayout.setVerticalGroup(
@@ -1181,7 +1297,9 @@ public class restoProgram extends javax.swing.JFrame {
                 .addComponent(btnAdminHomeViewMenu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRLAM)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAMViewOrders)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         pnlAdminMainTab.addTab("Home", pnlAdminMainHome);
@@ -1381,6 +1499,20 @@ public class restoProgram extends javax.swing.JFrame {
             }
         });
 
+        btnCMCOS.setText("Check Order Status");
+        btnCMCOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCMCOSActionPerformed(evt);
+            }
+        });
+
+        btnCMCO.setText("Check Out");
+        btnCMCO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCMCOActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCusMainHomeLayout = new javax.swing.GroupLayout(pnlCusMainHome);
         pnlCusMainHome.setLayout(pnlCusMainHomeLayout);
         pnlCusMainHomeLayout.setHorizontalGroup(
@@ -1391,8 +1523,10 @@ public class restoProgram extends javax.swing.JFrame {
                     .addGroup(pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnCMViewMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCMReserveTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnCMOrder))
-                .addContainerGap(417, Short.MAX_VALUE))
+                    .addComponent(btnCMOrder)
+                    .addComponent(btnCMCOS)
+                    .addComponent(btnCMCO))
+                .addContainerGap(391, Short.MAX_VALUE))
         );
         pnlCusMainHomeLayout.setVerticalGroup(
             pnlCusMainHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1403,7 +1537,11 @@ public class restoProgram extends javax.swing.JFrame {
                 .addComponent(btnCMReserveTable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCMOrder)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCMCOS)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCMCO)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         pnlCusMainTab.addTab("Home", pnlCusMainHome);
@@ -2143,6 +2281,10 @@ public class restoProgram extends javax.swing.JFrame {
                     SQLStatement.setDate(8, rslDate);
                     SQLStatement.setInt(9, rSeats);
                     SQLStatement.executeUpdate();
+                    sql = "Update tables set tblInUse = 0 where tblID = ?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, tblID);
+                    SQLStatement.executeUpdate();
                     this.say("Reservation booked");
                 }
             }
@@ -2163,6 +2305,15 @@ public class restoProgram extends javax.swing.JFrame {
                 this.switchPanel("pnlCOS");
             }else{
                 this.say("You aren't currently booked");
+                sql = "Select * from orderbfr where cusID = ?";
+                SQLStatement = con.prepareStatement(sql);
+                SQLStatement.setInt(1, currCustomer.getID());
+                queryResultSet = SQLStatement.executeQuery();
+                if(!queryResultSet.next()){
+                    this.switchPanel("pnlCOS");
+                }else{
+                    this.say("You have a pending order");
+                }
             }
         }catch(SQLException | HeadlessException e){
             this.say("Error:\n" + e);
@@ -2237,6 +2388,7 @@ public class restoProgram extends javax.swing.JFrame {
                 this.say("Item added!");
                 cmbMenu.setEnabled(false);
                 txtQty.setEditable(false);
+                txtQty.setText(null);
                 btnCOSAdd.setEnabled(false);
                 this.viewTable("tblOF");
             }
@@ -2248,7 +2400,212 @@ public class restoProgram extends javax.swing.JFrame {
     private void btnCOSCOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCOSCOrderActionPerformed
         // TODO add your handling code here:
         this.connect();
+        try{
+            String sql = "Select tblID from booklist where cusID = ?";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.setInt(1, currCustomer.getID());
+            queryResultSet = SQLStatement.executeQuery();
+            if(queryResultSet.next()){
+                int theTable = queryResultSet.getInt("tblID");
+                sql = "Select * from orderbfr";
+                SQLStatement = con.prepareStatement(sql);
+                queryResultSet = SQLStatement.executeQuery();
+                if(!queryResultSet.next()){
+                    sql = "Insert into orderdump("
+                        + "cusID, "
+                        + "cusFname, "
+                        + "ordStat, "
+                        + "ordDate, "
+                        + "tblID) "
+                        + "values(?, ?, ?, ?, ?)";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, (int) tblAVO.getValueAt(0, 1));
+                    SQLStatement.setString(2, (String) tblAVO.getValueAt(0, 2));
+                    SQLStatement.setString(3, "Checked Out");
+                    SQLStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+                    SQLStatement.setInt(5, theTable);
+                    SQLStatement.executeUpdate();
+                    sql = "Insert into orderbfr "
+                            + "Select * from orderform "
+                            + "where cusID = ? ";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, currCustomer.getID());
+                    SQLStatement.executeUpdate();
+                    sql = "Delete from orderform where cusID = ?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, currCustomer.getID());
+                    SQLStatement.executeUpdate();
+                    this.say("Please wait for your order to be processed");
+                    this.viewTable("tblOF");
+                    this.switchPanel("pnlCusMain");
+                }else{
+                    this.say("Please wait while another order is being processed");
+                    sql = "Delete from orderform where cusID = ?";
+                    SQLStatement = con.prepareStatement(sql);
+                    SQLStatement.setInt(1, currCustomer.getID());
+                    SQLStatement.executeUpdate();
+                    this.viewTable("tblOF");
+                    this.switchPanel("pnlCusMain");
+                }
+            }
+        }catch(NullPointerException | SQLException | HeadlessException e){
+            this.say("Error:\n" + e);
+        }
     }//GEN-LAST:event_btnCOSCOrderActionPerformed
+
+    private void btnCMCOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCMCOSActionPerformed
+        // TODO add your handling code here:
+        this.connect();
+        try{
+            String sql = "Select * from orderdump order by ordumpID desc limit 1 "
+                    + "where cusID = ?";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.setInt(1, currCustomer.getID());
+            queryResultSet = SQLStatement.executeQuery();
+            if(queryResultSet.next()){
+                this.say("Order status:\n" + queryResultSet.getString("ordState"));
+            }
+        }catch(NullPointerException | SQLException | HeadlessException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnCMCOSActionPerformed
+
+    private void tblAVOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAVOMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblAVOMouseClicked
+
+    private void btnAVOBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAVOBackActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlAdminMain");
+    }//GEN-LAST:event_btnAVOBackActionPerformed
+
+    private void btnAMViewOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAMViewOrdersActionPerformed
+        // TODO add your handling code here:
+        this.switchPanel("pnlAVO");
+    }//GEN-LAST:event_btnAMViewOrdersActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.viewTable("tblAVO");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAVOCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAVOCancelActionPerformed
+        // TODO add your handling code here:
+        this.connect();
+        try{
+            String sql = "Insert into orderdump("
+                    + "cusID, "
+                    + "cusFname, "
+                    + "ordStat, "
+                    + "ordDate) "
+                    + "values(?, ?, ?, ?)";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.setInt(1, (int) tblAVO.getValueAt(0, 1));
+            SQLStatement.setString(2, (String) tblAVO.getValueAt(0, 2));
+            SQLStatement.setString(3, "Cancelled");
+            SQLStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+            SQLStatement.executeUpdate();
+            sql = "Delete * from orderbfr";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.executeUpdate();
+            this.say("Order cancelled");
+            this.viewTable("tblAVO");
+        }catch(SQLException | HeadlessException | NullPointerException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnAVOCancelActionPerformed
+
+    private void btnAVOApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAVOApproveActionPerformed
+        // TODO add your handling code here:
+        this.connect();
+        try{
+            String sql = "Insert into orderdump("
+                    + "cusID, "
+                    + "cusFname, "
+                    + "ordStat, "
+                    + "ordDate) "
+                    + "values(?, ?, ?, ?)";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.setInt(1, (int) tblAVO.getValueAt(0, 1));
+            SQLStatement.setString(2, (String) tblAVO.getValueAt(0, 2));
+            SQLStatement.setString(3, "Approved");
+            SQLStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+            SQLStatement.executeUpdate();
+            sql = "Select * from orderbfr";
+            SQLStatement = con.prepareStatement(sql);
+            queryResultSet = SQLStatement.executeQuery();
+            while(queryResultSet.next()){
+                sql = "Insert into orderhistoy("
+                        + "cusID, "
+                        + "cusFname, "
+                        + "adminID, "
+                        + "mnID, "
+                        + "mnCourse, "
+                        + "mnName, "
+                        + "mnAmount, "
+                        + "mnPrice, "
+                        + "ttlPrice, "
+                        + "ordDate) "
+                        + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                SQLStatement = con.prepareStatement(sql);
+                SQLStatement.setInt(1, queryResultSet.getInt("cusID"));
+                SQLStatement.setString(2, queryResultSet.getString("cusFname"));
+                SQLStatement.setInt(3, currAdmin.getID());
+                SQLStatement.setInt(4, queryResultSet.getInt("menuID"));
+                SQLStatement.setString(5, queryResultSet.getString("menuCourse"));
+                SQLStatement.setString(6, queryResultSet.getString("menuName"));
+                SQLStatement.setInt(7, queryResultSet.getInt("menuAmount"));
+                SQLStatement.setInt(8, queryResultSet.getInt("menuPrice"));
+                SQLStatement.setInt(9, queryResultSet.getInt("totalPrice"));
+                SQLStatement.setDate(10, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+                this.say("Order Approved");
+                this.viewTable("tblAVO");
+            }
+        }catch(SQLException | HeadlessException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnAVOApproveActionPerformed
+
+    private void btnCMCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCMCOActionPerformed
+        // TODO add your handling code here:
+        this.connect();
+        try{
+            String sql = "Select * from booklist where cusID=?";
+            SQLStatement = con.prepareStatement(sql);
+            SQLStatement.setInt(1, currCustomer.getID());
+            queryResultSet = SQLStatement.executeQuery();
+            if(queryResultSet.next()){
+                int aTable = queryResultSet.getInt("tblID");
+                sql = "Insert into orderdump("
+                        + "cusID, "
+                        + "cusFname, "
+                        + "ordStat, "
+                        + "ordDate, "
+                        + "tblID) "
+                        + "values(?, ?, ?, ?, ?)";
+                SQLStatement = con.prepareStatement(sql);
+                SQLStatement.setInt(1, currCustomer.getID());
+                SQLStatement.setString(2, currCustomer.getFname());
+                SQLStatement.setString(3, "Checked Out");
+                SQLStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+                SQLStatement.setInt(5, aTable);
+                SQLStatement.executeUpdate();
+                sql = "Insert into bookhistory "
+                        + "Select * from booklist "
+                        + "where cusID = ?";
+                SQLStatement = con.prepareStatement(sql);
+                SQLStatement.setInt(1, currCustomer.getID());
+                SQLStatement.executeUpdate();
+                sql = "Delete from booklist where cusID = ?";
+                SQLStatement = con.prepareStatement(sql);
+                SQLStatement.setInt(1, currCustomer.getID());
+                SQLStatement.executeUpdate();
+                this.say("You have checked out!");
+            }
+        }catch(SQLException | HeadlessException | NullPointerException e){
+            this.say("Error:\n" + e);
+        }
+    }//GEN-LAST:event_btnCMCOActionPerformed
     
     private void connect(){
         try{
@@ -2306,6 +2663,9 @@ public class restoProgram extends javax.swing.JFrame {
                 break;
             case "pnlCOS":
                 mainPanel.add(pnlCOS);
+                break;
+            case "pnlAVO":
+                mainPanel.add(pnlAVO);
                 break;
             default:
                 break;
@@ -2608,6 +2968,16 @@ public class restoProgram extends javax.swing.JFrame {
                     this.say("Error:\n" + e);
                 }
                 break;
+            case "tblAVO":
+                try{
+                    String sql = "Select * from orderbfr";
+                    SQLStatement = con.prepareStatement(sql);
+                    queryResultSet = SQLStatement.executeQuery();
+                    tblAVO.setModel(DbUtils.resultSetToTableModel(queryResultSet));
+                }catch(SQLException | HeadlessException e){
+                    this.say("Error:\n" + e);
+                }
+                break;
             default:
                 break;
         }
@@ -2657,14 +3027,20 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JButton btnAMBack;
     private javax.swing.JButton btnAMEdit;
     private javax.swing.JButton btnAMRefresh;
+    private javax.swing.JButton btnAMViewOrders;
     private javax.swing.JButton btnARSBack;
     private javax.swing.JButton btnARSBook;
     private javax.swing.JButton btnARSCancel;
     private javax.swing.JButton btnARSRefresh;
+    private javax.swing.JButton btnAVOApprove;
+    private javax.swing.JToggleButton btnAVOBack;
+    private javax.swing.JButton btnAVOCancel;
     private javax.swing.JButton btnAdminAccountsRefresh;
     private javax.swing.JButton btnAdminAccountsView;
     private javax.swing.JButton btnAdminHomeViewMenu;
     private javax.swing.JButton btnAdminInfoRefresh;
+    private javax.swing.JButton btnCMCO;
+    private javax.swing.JButton btnCMCOS;
     private javax.swing.JButton btnCMOrder;
     private javax.swing.JButton btnCMReserveTable;
     private javax.swing.JButton btnCMViewMenu;
@@ -2698,6 +3074,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCourse;
     private javax.swing.JComboBox<String> cmbHR;
     private javax.swing.JComboBox<String> cmbMenu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2732,12 +3109,14 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private com.toedter.calendar.JDateChooser jdcRS;
     private javax.swing.JLabel lblLoginPassword;
     private javax.swing.JLabel lblLoginUsername;
     private javax.swing.JLabel lblPrice;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel pnlARS;
+    private javax.swing.JPanel pnlAVO;
     private javax.swing.JPanel pnlAdminAddMenu;
     private javax.swing.JPanel pnlAdminMain;
     private javax.swing.JPanel pnlAdminMainAccounts;
@@ -2759,6 +3138,7 @@ public class restoProgram extends javax.swing.JFrame {
     private javax.swing.JPanel pnlStartup;
     private javax.swing.JTable tblAMenu;
     private javax.swing.JTable tblARS;
+    private javax.swing.JTable tblAVO;
     private javax.swing.JTable tblAdminAccountsCustomer;
     private javax.swing.JTable tblCVM;
     private javax.swing.JTable tblOF;
